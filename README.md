@@ -158,6 +158,55 @@ salidas arriba del umbral, **chrF** de la traducción de vuelta al español
 contra la original (métrica de traducción automática independiente de LaBSE)
 y % de pasos corregidos.
 
+## Resultados (Colab, GPU T4)
+
+### Fine-tuning del latín con OPUS
+
+LoRA con 1,500 pares (3,000 ejemplos, 375 pasos, ~80 min). La pérdida bajó de
+1.89 a ~1.24 (`adaptador_latin/estado.json`).
+
+Contra las traducciones humanas de prueba (`salidas/metricas_opus.csv`):
+
+| Dirección | Frases | BLEU base | BLEU afinado | chrF++ base | chrF++ afinado |
+|---|---|---|---|---|---|
+| español → latín | 300 (Tatoeba) | 16.1 | **24.1** | 36.8 | **42.4** |
+| latín → español | 300 (Tatoeba) | 30.7 | **37.5** | 50.2 | **55.1** |
+| español → coreano | 200 (TED2020) | 13.3 | — | 24.1 | — |
+| coreano → español | 200 (TED2020) | 18.6 | — | 43.5 | — |
+| español → hindi | 200 (TED2020) | 21.2 | — | 41.2 | — |
+| hindi → español | 200 (TED2020) | 24.4 | — | 48.7 | — |
+
+El fine-tuning sube el latín unos 7-8 puntos de BLEU y 5-6 de chrF++ en las dos
+direcciones. **Ojo al interpretarlo**: las frases de prueba son de Tatoeba,
+igual que buena parte del entrenamiento, así que parte de la mejora es que el
+modelo aprendió el estilo de Tatoeba (orden de palabras, nombres latinizados
+como *Thoma*), no solo mejor latín; en algunas frases el afinado comete
+errores que el base no (`salidas/traducciones_opus.csv`). Coreano e hindi se
+miden con TED2020 (charlas, frases más largas y libres), por eso sus números
+no son comparables con los del latín.
+
+### Cadena de 6 pasos: ingenua vs re-anclada
+
+20 frases, cadena latín → coreano → hindi → latín → coreano → hindi
+(`salidas/resumen_por_paso.csv`, `salidas/similitud_por_paso.png`):
+
+| Paso | Idioma | Similitud ingenua | Similitud re-anclada | % arriba del umbral (ingenua → re-anclada) |
+|---|---|---|---|---|
+| 1 | latín | 0.742 | **0.847** | 55 % → **90 %** |
+| 2 | coreano | 0.857 | **0.913** | 85 % → **100 %** |
+| 3 | hindi | 0.871 | **0.922** | 90 % → **100 %** |
+| 4 | latín | 0.733 | **0.840** | 50 % → **95 %** |
+| 5 | coreano | 0.840 | **0.913** | 85 % → **100 %** |
+| 6 | hindi | 0.858 | **0.919** | 90 % → **100 %** |
+
+Con la cadena ingenua el significado se va perdiendo y el latín es el punto
+débil (la mitad de las frases queda por debajo del umbral). Con el re-anclaje
+la similitud se mantiene estable en los 6 pasos, sin acumular error: la frase
+final en hindi conserva el significado tanto como la del paso 2. La corrección
+desde el original solo hizo falta en el 5 % de los pasos de coreano.
+
+![Similitud por paso](salidas/similitud_por_paso.png)
+
 ## Créditos de los datos
 
 Corpus descargados de [OPUS](https://opus.nlpl.eu) (J. Tiedemann, *Parallel Data,

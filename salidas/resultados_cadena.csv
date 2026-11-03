@@ -1,0 +1,241 @@
+﻿modo,frase,paso,idioma,salida,regreso_es,similitud,chrf_regreso,corregido
+ingenua,El perro duerme bajo la mesa.,1,latín,Canis sub mensa dormit.,El perro duerme debajo de la mesa.,0.8968888521194458,76.49262303015666,False
+ingenua,El perro duerme bajo la mesa.,2,coreano,개는 식탁 아래에서 잠을 자고 있다.,El perro está durmiendo debajo de la mesa.,0.9213437438011169,52.376234688075286,False
+ingenua,El perro duerme bajo la mesa.,3,hindi,कुत्ता मेज के नीचे सो रहा है।,El perro está durmiendo debajo de la mesa.,0.959436297416687,52.376234688075286,False
+ingenua,El perro duerme bajo la mesa.,4,latín,Canis sub mensa dormit.,El perro duerme debajo de la mesa.,0.8968888521194458,76.49262303015666,False
+ingenua,El perro duerme bajo la mesa.,5,coreano,개는 식탁 아래에서 잠을 자고 있다.,El perro está durmiendo debajo de la mesa.,0.9213437438011169,52.376234688075286,False
+ingenua,El perro duerme bajo la mesa.,6,hindi,कुत्ता मेज के नीचे सो रहा है।,El perro está durmiendo debajo de la mesa.,0.959436297416687,52.376234688075286,False
+ingenua,Mañana voy a visitar a mi abuela.,1,latín,Cras aviam visitare volo.,Mañana voy a visitar a mi abuela.,0.6572889089584351,100.0,False
+ingenua,Mañana voy a visitar a mi abuela.,2,coreano,내일 나는 새를 보러 갈 것이다.,Mañana iré a ver pájaros.,0.7154541015625,21.71968524638219,False
+ingenua,Mañana voy a visitar a mi abuela.,3,hindi,कल मैं पक्षियों को देखने जाऊंगा।,Mañana iré a observar a los pájaros.,0.7123632431030273,23.29716405811821,False
+ingenua,Mañana voy a visitar a mi abuela.,4,latín,Cras aves videbo.,Mañana veré pájaros.,0.5378412008285522,24.026484112217435,False
+ingenua,Mañana voy a visitar a mi abuela.,5,coreano,내일 새를 볼 것이다.,Mañana veré un pájaro.,0.6126068830490112,23.822406253048754,False
+ingenua,Mañana voy a visitar a mi abuela.,6,hindi,कल मैं पक्षियों को देख पाऊंगा।,Mañana podré observar a los pájaros.,0.641141951084137,21.922977934974256,False
+ingenua,El agua del río está muy fría.,1,latín,Aqua fluminis frigida est.,El agua del río está fría.,0.8533562421798706,75.72290736770455,False
+ingenua,El agua del río está muy fría.,2,coreano,강물은 차갑다.,El río está frío.,0.6488767862319946,34.664834570054744,False
+ingenua,El agua del río está muy fría.,3,hindi,नदी ठंडी है।,El río está frío.,0.832741379737854,34.664834570054744,False
+ingenua,El agua del río está muy fría.,4,latín,Flumen frigidum est.,El río es frío.,0.5882602334022522,24.813570942121764,False
+ingenua,El agua del río está muy fría.,5,coreano,강은 차갑다.,El río está frío.,0.7168111801147461,34.664834570054744,False
+ingenua,El agua del río está muy fría.,6,hindi,नदी ठंडी है।,El río está frío.,0.832741379737854,34.664834570054744,False
+ingenua,Los estudiantes leen un libro en la biblioteca.,1,latín,Discipuli in bibliotheca librum legunt.,Los estudiantes están leyendo un libro en la biblioteca.,0.9339359402656555,81.47734417448578,False
+ingenua,Los estudiantes leen un libro en la biblioteca.,2,coreano,학생들은 도서관에서 책을 읽고 있다.,Los estudiantes están leyendo libros en la biblioteca.,0.9416179060935974,70.92609522240767,False
+ingenua,Los estudiantes leen un libro en la biblioteca.,3,hindi,छात्र पुस्तकालय में किताबें पढ़ रहे हैं।,Los estudiantes están leyendo libros en la biblioteca.,0.9302175641059875,70.92609522240767,False
+ingenua,Los estudiantes leen un libro en la biblioteca.,4,latín,Discipuli in bibliotheca studient.,Los estudiantes están estudiando en la biblioteca.,0.8231232166290283,67.45655011979272,False
+ingenua,Los estudiantes leen un libro en la biblioteca.,5,coreano,학생들은 도서관에서 공부하고 있다.,Los estudiantes están estudiando en la biblioteca.,0.8711127042770386,67.45655011979272,False
+ingenua,Los estudiantes leen un libro en la biblioteca.,6,hindi,छात्र पुस्तकालय में अध्ययन कर रहे हैं।,Están estudiando en la biblioteca de la escuela.,0.8765740394592285,52.84268054649869,False
+ingenua,Mi hermano compró un coche nuevo.,1,latín,Frater meus novum currum emisit.,Mi hermano compró un nuevo coche.,0.6614499092102051,76.05533878359965,False
+ingenua,Mi hermano compró un coche nuevo.,2,coreano,제 동생이 새 차를 샀습니다.,Mi hermano compró un coche nuevo.,0.9526846408843994,100.0,False
+ingenua,Mi hermano compró un coche nuevo.,3,hindi,मेरे भाई ने एक नई कार खरीदी है।,Mi hermano ha comprado un coche nuevo.,0.9740818738937378,73.18609740704376,False
+ingenua,Mi hermano compró un coche nuevo.,4,latín,Frater meus novum currum emisit.,Mi hermano compró un nuevo coche.,0.6614499092102051,76.05533878359965,False
+ingenua,Mi hermano compró un coche nuevo.,5,coreano,제 동생이 새 차를 샀습니다.,Mi hermano compró un coche nuevo.,0.9526846408843994,100.0,False
+ingenua,Mi hermano compró un coche nuevo.,6,hindi,मेरे भाई ने एक नई कार खरीदी है।,Mi hermano ha comprado un coche nuevo.,0.9740818738937378,73.18609740704376,False
+ingenua,La guerra destruyó la ciudad.,1,latín,Bellum urbem destruxit.,La guerra destruyó la ciudad.,0.8256385326385498,100.0,False
+ingenua,La guerra destruyó la ciudad.,2,coreano,전쟁은 도시를 파괴했다.,La guerra destruyó la ciudad.,0.9548423886299133,100.0,False
+ingenua,La guerra destruyó la ciudad.,3,hindi,युद्ध ने शहर को नष्ट कर दिया।,La guerra destruyó la ciudad.,0.9806978106498718,100.0,False
+ingenua,La guerra destruyó la ciudad.,4,latín,Bellum urbem destruxit.,La guerra destruyó la ciudad.,0.8256385326385498,100.0,False
+ingenua,La guerra destruyó la ciudad.,5,coreano,전쟁은 도시를 파괴했다.,La guerra destruyó la ciudad.,0.9548423886299133,100.0,False
+ingenua,La guerra destruyó la ciudad.,6,hindi,युद्ध ने शहर को नष्ट कर दिया।,La guerra destruyó la ciudad.,0.9806978106498718,100.0,False
+ingenua,El sol sale por el este.,1,latín,Sol oritur orientaliter.,El sol sale por el este.,0.7236907482147217,100.0,False
+ingenua,El sol sale por el este.,2,coreano,태양이 동쪽에서 떠오른다.,El sol sale por el este.,0.8054711222648621,100.0,False
+ingenua,El sol sale por el este.,3,hindi,सूर्य पूर्व दिशा से उगता है।,El sol sale por el este.,0.8122502565383911,100.0,False
+ingenua,El sol sale por el este.,4,latín,Sol orienti surgit.,El sol sale por el este.,0.6196936368942261,100.0,False
+ingenua,El sol sale por el este.,5,coreano,태양이 동쪽에서 떠오른다.,El sol sale por el este.,0.8054711222648621,100.0,False
+ingenua,El sol sale por el este.,6,hindi,सूर्य पूर्व दिशा से उगता है।,El sol sale por el este.,0.8122502565383911,100.0,False
+ingenua,Quiero aprender a tocar la guitarra.,1,latín,Guitarram canere volo.,Quiero cantar con la guitarra.,0.7633200287818909,49.23856746174244,False
+ingenua,Quiero aprender a tocar la guitarra.,2,coreano,나는 기타를 연주하고 싶다.,Quiero tocar la guitarra.,0.8465957641601562,63.114576651624645,False
+ingenua,Quiero aprender a tocar la guitarra.,3,hindi,मैं गिटार बजाना चाहता हूँ।,Quiero aprender a tocar la guitarra.,0.8942525386810303,100.0,False
+ingenua,Quiero aprender a tocar la guitarra.,4,latín,Gitara canere volo.,Quiero tocar la guitarra.,0.6027291417121887,63.114576651624645,False
+ingenua,Quiero aprender a tocar la guitarra.,5,coreano,나는 기타를 연주하고 싶다.,Quiero tocar la guitarra.,0.8465957641601562,63.114576651624645,False
+ingenua,Quiero aprender a tocar la guitarra.,6,hindi,मैं गिटार बजाना चाहता हूँ।,Quiero aprender a tocar la guitarra.,0.8942525386810303,100.0,False
+ingenua,Las flores del jardín son rojas.,1,latín,Flos horti ruber est.,La flor del jardín es roja.,0.4728955626487732,45.169338662664885,False
+ingenua,Las flores del jardín son rojas.,2,coreano,정원의 빨간 꽃이 있습니다.,Hay flores rojas en el jardín.,0.8622791171073914,48.31975318457174,False
+ingenua,Las flores del jardín son rojas.,3,hindi,एक बगीचे में लाल रंग के फूल हैं।,Hay flores rojas en un jardín.,0.8437157869338989,40.605462016851654,False
+ingenua,Las flores del jardín son rojas.,4,latín,In horto flores rubri sunt.,En el jardín hay flores rojas.,0.8085134029388428,51.863611357243855,False
+ingenua,Las flores del jardín son rojas.,5,coreano,정원에 빨간 꽃이 있습니다.,Hay flores rojas en el jardín.,0.8689207434654236,48.31975318457174,False
+ingenua,Las flores del jardín son rojas.,6,hindi,इस बगीचे में लाल रंग के फूल हैं।,En este jardín hay flores de color rojo.,0.8454198837280273,41.46726281966661,False
+ingenua,El maestro explica la lección a los niños.,1,latín,Magister discipulos docet.,El maestro enseña a los alumnos.,0.683114767074585,36.25360532848136,False
+ingenua,El maestro explica la lección a los niños.,2,coreano,선생님은 학생들을 가르칩니다.,El profesor enseña a los estudiantes.,0.7947568893432617,17.20943542604093,False
+ingenua,El maestro explica la lección a los niños.,3,hindi,शिक्षक छात्रों को पढ़ाते हैं।,Los profesores enseñan a los estudiantes.,0.8256655335426331,17.906566018823554,False
+ingenua,El maestro explica la lección a los niños.,4,latín,Magister discipulos docet.,El maestro enseña a los alumnos.,0.683114767074585,36.25360532848136,False
+ingenua,El maestro explica la lección a los niños.,5,coreano,선생님은 학생들을 가르칩니다.,El profesor enseña a los estudiantes.,0.7947568893432617,17.20943542604093,False
+ingenua,El maestro explica la lección a los niños.,6,hindi,शिक्षक छात्रों को पढ़ाते हैं।,Los profesores enseñan a los estudiantes.,0.8256655335426331,17.906566018823554,False
+ingenua,Hoy hace mucho calor.,1,latín,Hodie calidum est.,Hoy hace calor.,0.8751252889633179,53.1294114501584,False
+ingenua,Hoy hace mucho calor.,2,coreano,오늘 날씨가 덥습니다.,Hoy hace mucho calor.,0.9083930253982544,100.0,False
+ingenua,Hoy hace mucho calor.,3,hindi,आज मौसम गर्म है।,Hoy hace calor.,0.9078876972198486,53.1294114501584,False
+ingenua,Hoy hace mucho calor.,4,latín,Hodie calidum est.,Hoy hace calor.,0.8751252889633179,53.1294114501584,False
+ingenua,Hoy hace mucho calor.,5,coreano,오늘 날씨가 덥습니다.,Hoy hace mucho calor.,0.9083930253982544,100.0,False
+ingenua,Hoy hace mucho calor.,6,hindi,आज मौसम गर्म है।,Hoy hace calor.,0.9078876972198486,53.1294114501584,False
+ingenua,Los soldados defendieron la puerta de la ciudad.,1,latín,Milites portam urbis defendebant.,Los soldados defendían la puerta de la ciudad.,0.8307220935821533,83.75566805513411,False
+ingenua,Los soldados defendieron la puerta de la ciudad.,2,coreano,병사들은 도시의 문을 지키고 있었다.,Los soldados estaban custodiando las puertas de la ciudad.,0.9074164628982544,55.928419339109446,False
+ingenua,Los soldados defendieron la puerta de la ciudad.,3,hindi,सैनिक शहर के प्रवेश द्वार की रक्षा कर रहे थे।,Los soldados estaban protegiendo la entrada de la ciudad.,0.931790292263031,53.6802309173097,False
+ingenua,Los soldados defendieron la puerta de la ciudad.,4,latín,Milites portam urbis defendebant.,Los soldados defendían la puerta de la ciudad.,0.8307220935821533,83.75566805513411,False
+ingenua,Los soldados defendieron la puerta de la ciudad.,5,coreano,병사들은 도시의 문을 지키고 있었다.,Los soldados estaban custodiando las puertas de la ciudad.,0.9074164628982544,55.928419339109446,False
+ingenua,Los soldados defendieron la puerta de la ciudad.,6,hindi,सैनिक शहर के प्रवेश द्वार की रक्षा कर रहे थे।,Los soldados estaban protegiendo la entrada de la ciudad.,0.931790292263031,53.6802309173097,False
+ingenua,Mi madre prepara la cena.,1,latín,Mater mea cenam parat.,Mi madre está preparando la cena.,0.778770923614502,66.11422793607042,False
+ingenua,Mi madre prepara la cena.,2,coreano,엄마가 저녁을 준비하고 있어요.,Mi mamá está preparando la cena.,0.9086337685585022,53.89567946859122,False
+ingenua,Mi madre prepara la cena.,3,hindi,माँ रात का खाना बना रही हैं।,La madre está preparando la cena.,0.9023813009262085,55.98748116612492,False
+ingenua,Mi madre prepara la cena.,4,latín,Mater nocte cibum parat.,La madre prepara la cena.,0.8209404349327087,89.09567628220879,False
+ingenua,Mi madre prepara la cena.,5,coreano,엄마는 밤에 저녁을 준비한다.,Mi madre prepara la cena por la noche.,0.8611164093017578,86.00634986756037,False
+ingenua,Mi madre prepara la cena.,6,hindi,माँ रात में रात का खाना बनाती है।,Mi madre prepara la cena por la noche.,0.8390638828277588,86.00634986756037,False
+ingenua,El tren llega a las ocho de la mañana.,1,latín,Vagamentum horam octavam matutinae est.,La hora de salida es a las ocho de la mañana.,0.6727353930473328,60.431778854062145,False
+ingenua,El tren llega a las ocho de la mañana.,2,coreano,아침 8시입니다.,Son las 8 de la mañana.,0.6631099581718445,39.115603703820675,False
+ingenua,El tren llega a las ocho de la mañana.,3,hindi,सुबह 8 बजे।,8 de la mañana.,0.6465129852294922,35.269276150950176,False
+ingenua,El tren llega a las ocho de la mañana.,4,latín,Octo hora matutina.,Ocho de la mañana.,0.5381423234939575,46.702989927986636,False
+ingenua,El tren llega a las ocho de la mañana.,5,coreano,오전 8시.,8 de la mañana.,0.590491771697998,35.269276150950176,False
+ingenua,El tren llega a las ocho de la mañana.,6,hindi,सुबह 8 बजे।,8 de la mañana.,0.6465129852294922,35.269276150950176,False
+ingenua,"La vida es corta, el arte es largo.",1,latín,"Vita brevis, ars longa.","La vida es corta, el arte es largo.",0.6961631774902344,100.0,False
+ingenua,"La vida es corta, el arte es largo.",2,coreano,인생은 짧고 예술은 길다.,"La vida es corta, pero el arte es eterno.",0.9365741014480591,65.90339413389967,False
+ingenua,"La vida es corta, el arte es largo.",3,hindi,"जीवन छोटा है, लेकिन कला अनंत है।","La vida es corta, pero el arte es infinito.",0.8531349897384644,64.93170991481696,False
+ingenua,"La vida es corta, el arte es largo.",4,latín,"Vita brevis, ars infinita est.","La vida es corta, el arte es infinito.",0.732143223285675,76.37359347940713,False
+ingenua,"La vida es corta, el arte es largo.",5,coreano,인생은 짧고 예술은 영원하다.,"La vida es breve, pero el arte es eterno.",0.9146029353141785,45.465531010489855,False
+ingenua,"La vida es corta, el arte es largo.",6,hindi,"जीवन छोटा है, लेकिन कला हमेशा के लिए रहती है।","La vida es corta, pero el arte perdura para siempre.",0.8188849687576294,55.887320322805536,False
+ingenua,El médico cura a los enfermos.,1,latín,Medicus aegros sanat.,El médico cura al enfermo.,0.483955442905426,72.96366607307826,False
+ingenua,El médico cura a los enfermos.,2,coreano,의사는 환자를 치료한다.,El médico trata al paciente.,0.9067760109901428,33.79783895980669,False
+ingenua,El médico cura a los enfermos.,3,hindi,डॉक्टर मरीज का इलाज करते हैं।,El médico está atendiendo al paciente.,0.9126236438751221,30.000390613585694,False
+ingenua,El médico cura a los enfermos.,4,latín,Medicus aegro medicat.,El médico está curando al paciente.,0.6259167790412903,36.13616101333857,False
+ingenua,El médico cura a los enfermos.,5,coreano,의사가 환자를 치료한다.,El médico trata al paciente.,0.8995111584663391,33.79783895980669,False
+ingenua,El médico cura a los enfermos.,6,hindi,डॉक्टर मरीज का इलाज करते हैं।,El médico está atendiendo al paciente.,0.9126236438751221,30.000390613585694,False
+ingenua,Necesito comprar pan y leche.,1,latín,Panem et lacem emere necesse est.,Es necesario comprar pan y leche.,0.7633845806121826,74.35666612196941,False
+ingenua,Necesito comprar pan y leche.,2,coreano,빵과 우유를 사야 합니다.,Necesito comprar pan y leche.,0.8907029628753662,100.0,False
+ingenua,Necesito comprar pan y leche.,3,hindi,मुझे ब्रेड और दूध खरीदना है।,Necesito comprar pan y leche.,0.9453036785125732,100.0,False
+ingenua,Necesito comprar pan y leche.,4,latín,Panem et lactum emere volo.,Quiero comprar pan y leche.,0.8092069625854492,71.31116345115345,False
+ingenua,Necesito comprar pan y leche.,5,coreano,빵과 우유를 사야 해요.,Necesito comprar pan y leche.,0.9099081158638,100.0,False
+ingenua,Necesito comprar pan y leche.,6,hindi,मुझे ब्रेड और दूध खरीदना है।,Necesito comprar pan y leche.,0.9453036785125732,100.0,False
+ingenua,El rey gobierna con justicia.,1,latín,Rex iustice gubernat.,El rey gobierna con justicia.,0.7629469633102417,100.0,False
+ingenua,El rey gobierna con justicia.,2,coreano,왕은 정의로 통치한다.,El rey gobierna con justicia.,0.8954914808273315,100.0,False
+ingenua,El rey gobierna con justicia.,3,hindi,राजा न्याय के अनुसार शासन करते हैं।,El rey gobierna de acuerdo con la justicia.,0.8422223925590515,72.61023660523743,False
+ingenua,El rey gobierna con justicia.,4,latín,Rex iustitia regnat.,El rey gobierna con justicia.,0.8718439340591431,100.0,False
+ingenua,El rey gobierna con justicia.,5,coreano,정의로운 왕이 통치한다.,Un rey justo gobierna.,0.7951953411102295,39.82617478870546,False
+ingenua,El rey gobierna con justicia.,6,hindi,एक न्यायपूर्ण राजा शासन करता है।,Un rey justo gobierna.,0.8162060976028442,39.82617478870546,False
+ingenua,Los pájaros cantan en el árbol.,1,latín,Aves in arbore canunt.,Los pájaros cantan en el árbol.,0.8436881899833679,100.0,False
+ingenua,Los pájaros cantan en el árbol.,2,coreano,새들이 나무 위에서 노래한다.,Los pájaros cantan en los árboles.,0.8996093273162842,75.93457375979249,False
+ingenua,Los pájaros cantan en el árbol.,3,hindi,पक्षी पेड़ों पर गा रहे हैं।,Los pájaros están cantando en los árboles.,0.931316614151001,55.42218181263067,False
+ingenua,Los pájaros cantan en el árbol.,4,latín,Aves in arbore cantant.,Los pájaros cantan en el árbol.,0.8429315686225891,100.0,False
+ingenua,Los pájaros cantan en el árbol.,5,coreano,새들이 나무 위에서 노래한다.,Los pájaros cantan en los árboles.,0.8996093273162842,75.93457375979249,False
+ingenua,Los pájaros cantan en el árbol.,6,hindi,पक्षी पेड़ों पर गा रहे हैं।,Los pájaros están cantando en los árboles.,0.931316614151001,55.42218181263067,False
+ingenua,¿Dónde está la estación de autobuses?,1,latín,Ubi est statio omnibus?,¿Dónde está la estación para todos?,0.6682855486869812,64.2533971944485,False
+ingenua,¿Dónde está la estación de autobuses?,2,coreano,가장 가까운 역은 어디에 있나요?,¿Cuál es la estación más cercana?,0.7782227993011475,32.315244245556975,False
+ingenua,¿Dónde está la estación de autobuses?,3,hindi,सबसे नज़दीकी स्टेशन कहाँ है?,¿Cuál es la estación más cercana?,0.7761121988296509,32.315244245556975,False
+ingenua,¿Dónde está la estación de autobuses?,4,latín,Ubi est vicina statio?,¿Dónde está la estación de tren más cercana?,0.6576700806617737,66.34683160298658,False
+ingenua,¿Dónde está la estación de autobuses?,5,coreano,가장 가까운 역은 어디에 있나요?,¿Cuál es la estación más cercana?,0.7782227993011475,32.315244245556975,False
+ingenua,¿Dónde está la estación de autobuses?,6,hindi,सबसे नज़दीकी स्टेशन कहाँ है?,¿Cuál es la estación más cercana?,0.7761121988296509,32.315244245556975,False
+re-anclada,El perro duerme bajo la mesa.,1,latín,Canis sub mensam dormit.,El perro duerme debajo de la mesa.,0.9047526121139526,76.49262303015666,False
+re-anclada,El perro duerme bajo la mesa.,2,coreano,개가 테이블 아래에서 잠을 자고 있다.,Un perro está durmiendo debajo de la mesa.,0.9408054351806641,43.89151731145587,False
+re-anclada,El perro duerme bajo la mesa.,3,hindi,कुत्ता मेज के नीचे सो रहा है।,El perro está durmiendo debajo de la mesa.,0.959436297416687,52.376234688075286,False
+re-anclada,El perro duerme bajo la mesa.,4,latín,Cane sub mensa dormit.,El perro duerme debajo de la mesa.,0.9222687482833862,76.49262303015666,False
+re-anclada,El perro duerme bajo la mesa.,5,coreano,개는 식탁 아래에서 잠을 자고 있습니다.,El perro está durmiendo debajo de la mesa.,0.9272431135177612,52.376234688075286,False
+re-anclada,El perro duerme bajo la mesa.,6,hindi,कुत्ता मेज के नीचे सो रहा है।,El perro está durmiendo debajo de la mesa.,0.959436297416687,52.376234688075286,False
+re-anclada,Mañana voy a visitar a mi abuela.,1,latín,Cras matrem meam visitare ero.,Mañana visitaré a mi madre.,0.8942117691040039,45.26289669710382,False
+re-anclada,Mañana voy a visitar a mi abuela.,2,coreano,내일 엄마를 방문하러 갈 거예요.,Mañana iré a visitar a mi madre.,0.8931189775466919,50.49806910997843,False
+re-anclada,Mañana voy a visitar a mi abuela.,3,hindi,मैं कल अपनी माँ से मिलने जा रहा हूँ।,Mañana voy a visitar a mi madre.,0.8697988986968994,73.74282179814553,False
+re-anclada,Mañana voy a visitar a mi abuela.,4,latín,Cras matrem meam visitare ibo.,Mañana voy a visitar a mi madre.,0.8966058492660522,73.74282179814553,False
+re-anclada,Mañana voy a visitar a mi abuela.,5,coreano,내일 엄마를 방문하러 갈 거예요.,Mañana iré a visitar a mi madre.,0.8931189775466919,50.49806910997843,False
+re-anclada,Mañana voy a visitar a mi abuela.,6,hindi,मैं कल अपनी माँ से मिलने जा रहा हूँ।,Mañana voy a visitar a mi madre.,0.8697988986968994,73.74282179814553,False
+re-anclada,El agua del río está muy fría.,1,latín,Aqua fluminis frigidissima est.,El agua del río es muy fría.,0.862600564956665,79.7780995586733,False
+re-anclada,El agua del río está muy fría.,2,coreano,강물은 가장 차가운 물입니다.,El agua del río es el agua más fría.,0.8028163909912109,63.98503277748119,False
+re-anclada,El agua del río está muy fría.,3,hindi,नदी सबसे ठंडा पानी होती है।,El río tiene el agua más fría.,0.8432140946388245,35.6991498839325,False
+re-anclada,El agua del río está muy fría.,4,latín,Fluvius aqua frigida est.,El río es frío.,0.7999215126037598,24.813570942121764,False
+re-anclada,El agua del río está muy fría.,5,coreano,강은 차가운 물이다.,El río tiene agua fría.,0.8007638454437256,30.419132268915156,False
+re-anclada,El agua del río está muy fría.,6,hindi,नदी में ठंडा पानी है।,El río tiene agua fría.,0.8461295366287231,30.419132268915156,False
+re-anclada,Los estudiantes leen un libro en la biblioteca.,1,latín,Discipuli in bibliotheca librum legunt.,Los estudiantes están leyendo un libro en la biblioteca.,0.9339358806610107,81.47734417448578,False
+re-anclada,Los estudiantes leen un libro en la biblioteca.,2,coreano,학생들은 도서관에서 책을 읽고 있습니다.,Los estudiantes están leyendo libros en la biblioteca.,0.9490710496902466,70.92609522240767,False
+re-anclada,Los estudiantes leen un libro en la biblioteca.,3,hindi,छात्र पुस्तकालय में पुस्तकें पढ़ रहे हैं।,Los estudiantes están leyendo libros en la biblioteca.,0.9323487281799316,70.92609522240767,False
+re-anclada,Los estudiantes leen un libro en la biblioteca.,4,latín,Discipuli in bibliotheca librum legunt.,Los estudiantes están leyendo un libro en la biblioteca.,0.9339358806610107,81.47734417448578,False
+re-anclada,Los estudiantes leen un libro en la biblioteca.,5,coreano,학생들은 도서관에서 책을 읽고 있습니다.,Los estudiantes están leyendo libros en la biblioteca.,0.9490710496902466,70.92609522240767,False
+re-anclada,Los estudiantes leen un libro en la biblioteca.,6,hindi,छात्र पुस्तकालय में पुस्तकें पढ़ रहे हैं।,Los estudiantes están leyendo libros en la biblioteca.,0.9323487281799316,70.92609522240767,False
+re-anclada,Mi hermano compró un coche nuevo.,1,latín,Frater meus vehiculum novum emiit.,Mi hermano compró un coche nuevo.,0.8026801347732544,100.0,False
+re-anclada,Mi hermano compró un coche nuevo.,2,coreano,제 동생이 새 차를 샀습니다.,Mi hermano compró un coche nuevo.,0.9526845216751099,100.0,False
+re-anclada,Mi hermano compró un coche nuevo.,3,hindi,मेरे भाई ने एक नया कार खरीदा है।,Mi hermano ha comprado un coche nuevo.,0.9777489900588989,73.18609740704376,False
+re-anclada,Mi hermano compró un coche nuevo.,4,latín,Frater meus vehiculum novum emovit.,Mi hermano va a comprar un coche nuevo.,0.8071606159210205,73.18609740704376,False
+re-anclada,Mi hermano compró un coche nuevo.,5,coreano,제 남동생이 새 차를 샀습니다.,Mi hermano menor ha comprado un coche nuevo.,0.955267071723938,70.53179353907507,False
+re-anclada,Mi hermano compró un coche nuevo.,6,hindi,मेरे भाई ने एक नया कार खरीदा है।,Mi hermano ha comprado un coche nuevo.,0.9777489900588989,73.18609740704376,False
+re-anclada,La guerra destruyó la ciudad.,1,latín,Bellum urbem destruxit.,La guerra destruyó la ciudad.,0.8256384134292603,100.0,False
+re-anclada,La guerra destruyó la ciudad.,2,coreano,전쟁은 도시를 파괴했습니다.,La guerra destruyó la ciudad.,0.9737277626991272,100.0,False
+re-anclada,La guerra destruyó la ciudad.,3,hindi,युद्ध ने शहर को नष्ट कर दिया।,La guerra destruyó la ciudad.,0.980697751045227,100.0,False
+re-anclada,La guerra destruyó la ciudad.,4,latín,Bellum urbem destruxit.,La guerra destruyó la ciudad.,0.8256384134292603,100.0,False
+re-anclada,La guerra destruyó la ciudad.,5,coreano,전쟁은 도시를 파괴했습니다.,La guerra destruyó la ciudad.,0.9737277626991272,100.0,False
+re-anclada,La guerra destruyó la ciudad.,6,hindi,युद्ध ने शहर को नष्ट कर दिया।,La guerra destruyó la ciudad.,0.980697751045227,100.0,False
+re-anclada,El sol sale por el este.,1,latín,Sol oritur in oriente.,El sol sale por el este.,0.8314967155456543,100.0,False
+re-anclada,El sol sale por el este.,2,coreano,태양은 동쪽에서 뜹니다.,El sol sale por el este.,0.8591350317001343,100.0,False
+re-anclada,El sol sale por el este.,3,hindi,सूर्य पूर्व दिशा से निकलता है।,El sol sale por el este.,0.8294926881790161,100.0,False
+re-anclada,El sol sale por el este.,4,latín,Sol oritur ab oriente.,El sol sale por el este.,0.8312056064605713,100.0,False
+re-anclada,El sol sale por el este.,5,coreano,태양은 동쪽에서 뜹니다.,El sol sale por el este.,0.8591350317001343,100.0,False
+re-anclada,El sol sale por el este.,6,hindi,सूर्य पूर्व दिशा से निकलता है।,El sol sale por el este.,0.8294926881790161,100.0,False
+re-anclada,Quiero aprender a tocar la guitarra.,1,latín,Volo a guitara cantare.,Quiero cantar con la guitarra.,0.8548896312713623,49.23856746174244,False
+re-anclada,Quiero aprender a tocar la guitarra.,2,coreano,저는 기타를 연주하고 싶어요.,Me gustaría tocar la guitarra.,0.8584884405136108,54.76725743994915,False
+re-anclada,Quiero aprender a tocar la guitarra.,3,hindi,मैं गिटार बजाना सीखना चाहता हूँ।,Quiero aprender a tocar la guitarra.,0.9559957981109619,100.0,False
+re-anclada,Quiero aprender a tocar la guitarra.,4,latín,Guitaram ludere cupio.,Quiero tocar la guitarra.,0.8123863935470581,63.114576651624645,False
+re-anclada,Quiero aprender a tocar la guitarra.,5,coreano,나는 기타를 연주하고 싶어요.,Quiero tocar la guitarra.,0.8522778749465942,63.114576651624645,False
+re-anclada,Quiero aprender a tocar la guitarra.,6,hindi,मुझे गिटार बजाना सीखना है।,Quiero aprender a tocar la guitarra.,0.9274941682815552,100.0,False
+re-anclada,Las flores del jardín son rojas.,1,latín,Flores horti rubri sunt.,Las flores del jardín son rojas.,0.799293041229248,100.0,False
+re-anclada,Las flores del jardín son rojas.,2,coreano,정원의 꽃은 빨갛습니다.,Las flores del jardín son rojas.,0.9314532279968262,100.0,False
+re-anclada,Las flores del jardín son rojas.,3,hindi,बगीचे के फूल लाल हैं।,Las flores del jardín son rojas.,0.9460679292678833,100.0,False
+re-anclada,Las flores del jardín son rojas.,4,latín,Flores horti rubri sunt.,Las flores del jardín son rojas.,0.799293041229248,100.0,False
+re-anclada,Las flores del jardín son rojas.,5,coreano,정원의 꽃은 빨갛습니다.,Las flores del jardín son rojas.,0.9314532279968262,100.0,False
+re-anclada,Las flores del jardín son rojas.,6,hindi,बगीचे के फूल लाल हैं।,Las flores del jardín son rojas.,0.9460679292678833,100.0,False
+re-anclada,El maestro explica la lección a los niños.,1,latín,Magister lectionem ad pueros explicat.,El maestro explica la lectura a los niños.,0.8866338729858398,79.66704607062768,False
+re-anclada,El maestro explica la lección a los niños.,2,coreano,선생님은 아이들에게 읽는 법을 가르칩니다.,El profesor enseña a los niños a leer.,0.8145824670791626,30.123298172919423,False
+re-anclada,El maestro explica la lección a los niños.,3,hindi,शिक्षक बच्चों को पढ़ने की विधि सिखाते हैं।,Los profesores enseñan a los niños cómo leer.,0.8380306363105774,29.983088208015673,False
+re-anclada,El maestro explica la lección a los niños.,4,latín,Magister discipulorum methodum legendi docet.,El maestro enseña a sus alumnos cómo leer.,0.7976365089416504,31.953126925256907,False
+re-anclada,El maestro explica la lección a los niños.,5,coreano,교사는 학생들에게 읽는 방법을 가르친다.,El profesor enseña a los estudiantes cómo leer.,0.8004333972930908,18.28518870632824,False
+re-anclada,El maestro explica la lección a los niños.,6,hindi,शिक्षक छात्रों को पढ़ने की विधि सिखाते हैं।,Los profesores enseñan a los estudiantes cómo leer.,0.812669038772583,18.922585606001743,False
+re-anclada,Hoy hace mucho calor.,1,latín,Hodie valde calidum est.,Hoy hace mucho calor.,0.9341999292373657,100.0,False
+re-anclada,Hoy hace mucho calor.,2,coreano,오늘은 매우 덥습니다.,Hoy hace mucho calor.,0.9362322092056274,100.0,False
+re-anclada,Hoy hace mucho calor.,3,hindi,आज बहुत गर्मी है.,Hoy hace mucho calor.,0.966576337814331,100.0,False
+re-anclada,Hoy hace mucho calor.,4,latín,Hodie valde calidum est.,Hoy hace mucho calor.,0.9341999292373657,100.0,False
+re-anclada,Hoy hace mucho calor.,5,coreano,오늘은 매우 덥습니다.,Hoy hace mucho calor.,0.9362322092056274,100.0,False
+re-anclada,Hoy hace mucho calor.,6,hindi,आज बहुत गर्मी है.,Hoy hace mucho calor.,0.966576337814331,100.0,False
+re-anclada,Los soldados defendieron la puerta de la ciudad.,1,latín,Milites portam urbis defenderunt.,Los soldados defendieron la puerta de la ciudad.,0.8890741467475891,100.0,False
+re-anclada,Los soldados defendieron la puerta de la ciudad.,2,coreano,병사들은 도시의 문을 지켰습니다.,Los soldados vigilaban las puertas de la ciudad.,0.93855220079422,56.4902660634368,False
+re-anclada,Los soldados defendieron la puerta de la ciudad.,3,hindi,सैनिकों ने शहर के द्वार की रक्षा की।,Los soldados defendieron las puertas de la ciudad.,0.970301628112793,85.70468702029203,False
+re-anclada,Los soldados defendieron la puerta de la ciudad.,4,latín,Milites portas urbis defenderunt.,Los soldados defendieron las puertas de la ciudad.,0.8924733400344849,85.70468702029203,False
+re-anclada,Los soldados defendieron la puerta de la ciudad.,5,coreano,병사들은 도시의 문을 방어했다.,Los soldados defendían las puertas de la ciudad.,0.9600722789764404,70.85493128657441,False
+re-anclada,Los soldados defendieron la puerta de la ciudad.,6,hindi,सैनिकों ने शहर के प्रवेश द्वार की रक्षा की।,Los soldados defendieron las puertas de la ciudad.,0.9568120241165161,85.70468702029203,False
+re-anclada,Mi madre prepara la cena.,1,latín,Mater mea cenam facit.,Mi madre cocina la cena.,0.8673998117446899,53.35964694343123,False
+re-anclada,Mi madre prepara la cena.,2,coreano,엄마가 저녁을 요리하고 있어요.,Mi mamá está preparando la cena.,0.9089093804359436,53.89567946859122,False
+re-anclada,Mi madre prepara la cena.,3,hindi,माँ रात के खाने को बना रही हैं।,La madre está preparando la cena.,0.905784010887146,55.98748116612492,False
+re-anclada,Mi madre prepara la cena.,4,latín,Mater cibum nocturnum parat.,Mamá está preparando la cena.,0.8168258666992188,49.23942576393315,False
+re-anclada,Mi madre prepara la cena.,5,coreano,엄마는 저녁을 준비하고 있습니다.,Mi madre está preparando la cena.,0.9299298524856567,66.11422793607042,False
+re-anclada,Mi madre prepara la cena.,6,hindi,माँ रात का खाना बना रही हैं।,La madre está preparando la cena.,0.9023813009262085,55.98748116612492,False
+re-anclada,El tren llega a las ocho de la mañana.,1,latín,Vagamentum horam octavam matutina advenit.,La hora de la salida es a las ocho de la mañana.,0.6878972053527832,60.12920467883608,False
+re-anclada,El tren llega a las ocho de la mañana.,2,coreano,기차가 새벽 8시에 도착합니다.,El tren llegará a las 8 de la mañana.,0.9505789279937744,67.52261860361499,True
+re-anclada,El tren llega a las ocho de la mañana.,3,hindi,ट्रेन सुबह 8 बजे पहुंचती है।,El tren llega a las 8 de la mañana.,0.9451411962509155,77.57264322914385,False
+re-anclada,El tren llega a las ocho de la mañana.,4,latín,Vagamentum horam octavam matutina advenit.,La hora de la salida es a las ocho de la mañana.,0.6878972053527832,60.12920467883608,False
+re-anclada,El tren llega a las ocho de la mañana.,5,coreano,기차가 새벽 8시에 도착합니다.,El tren llegará a las 8 de la mañana.,0.9505789279937744,67.52261860361499,True
+re-anclada,El tren llega a las ocho de la mañana.,6,hindi,ट्रेन सुबह 8 बजे पहुंचती है।,El tren llega a las 8 de la mañana.,0.9451411962509155,77.57264322914385,False
+re-anclada,"La vida es corta, el arte es largo.",1,latín,"Vita brevis est, ars longa.","La vida es corta, el arte es largo.",0.7901178598403931,100.0,False
+re-anclada,"La vida es corta, el arte es largo.",2,coreano,"인생은 짧고, 예술은 길다.","La vida es corta, pero el arte es eterno.",0.9429357647895813,65.90339413389967,False
+re-anclada,"La vida es corta, el arte es largo.",3,hindi,"जीवन छोटा है, और कला अनंत।","La vida es corta, y el arte es infinito.",0.8763062357902527,65.82165643149548,False
+re-anclada,"La vida es corta, el arte es largo.",4,latín,"Vita brevis est, ars infinita est.","La vida es corta, el arte es infinito.",0.7893409729003906,76.37359347940713,False
+re-anclada,"La vida es corta, el arte es largo.",5,coreano,"인생은 짧고, 예술은 영원하다.","La vida es breve, pero el arte es eterno.",0.9211310744285583,45.465531010489855,False
+re-anclada,"La vida es corta, el arte es largo.",6,hindi,"जीवन छोटा है, लेकिन कला अनंत है।","La vida es corta, pero el arte es infinito.",0.8531349897384644,64.93170991481696,False
+re-anclada,El médico cura a los enfermos.,1,latín,Medicus aegros curat.,El médico cura al enfermo.,0.6475909948348999,72.96366607307826,False
+re-anclada,El médico cura a los enfermos.,2,coreano,의사는 환자를 치료합니다.,El médico trata al paciente.,0.9313455820083618,33.79783895980669,False
+re-anclada,El médico cura a los enfermos.,3,hindi,डॉक्टर रोगी का इलाज करते हैं।,El médico está tratando al paciente.,0.9182275533676147,31.78726724343015,False
+re-anclada,El médico cura a los enfermos.,4,latín,Medicus patientem curat.,El médico está cuidando al paciente.,0.8368431329727173,31.78726724343015,False
+re-anclada,El médico cura a los enfermos.,5,coreano,의사가 환자를 치료합니다.,El médico trata al paciente.,0.9283133149147034,33.79783895980669,False
+re-anclada,El médico cura a los enfermos.,6,hindi,डॉक्टर रोगी का इलाज करते हैं।,El médico está tratando al paciente.,0.9182275533676147,31.78726724343015,False
+re-anclada,Necesito comprar pan y leche.,1,latín,Panem et lactem emere necesse mihi est.,Necesito comprar pan y leche.,0.8809775114059448,100.0,False
+re-anclada,Necesito comprar pan y leche.,2,coreano,빵과 우유를 사야 해요.,Necesito comprar pan y leche.,0.9099081754684448,100.0,False
+re-anclada,Necesito comprar pan y leche.,3,hindi,मुझे ब्रेड और दूध खरीदने की ज़रूरत है।,Necesito comprar pan y leche.,0.9562522768974304,100.0,False
+re-anclada,Necesito comprar pan y leche.,4,latín,Panem et lactem emere necesse est.,Es necesario comprar pan y leche.,0.8561640977859497,74.35666612196941,False
+re-anclada,Necesito comprar pan y leche.,5,coreano,빵과 우유를 사야 해요.,Necesito comprar pan y leche.,0.9099081754684448,100.0,False
+re-anclada,Necesito comprar pan y leche.,6,hindi,मुझे ब्रेड और दूध खरीदने की ज़रूरत है।,Necesito comprar pan y leche.,0.9562522768974304,100.0,False
+re-anclada,El rey gobierna con justicia.,1,latín,Rex iustitia gubernat.,El rey gobierna con justicia.,0.8912402987480164,100.0,False
+re-anclada,El rey gobierna con justicia.,2,coreano,왕은 정의로 통치한다.,El rey gobierna con justicia.,0.8954916000366211,100.0,False
+re-anclada,El rey gobierna con justicia.,3,hindi,राजा न्यायपूर्वक शासन करते हैं।,El rey gobierna de manera justa.,0.8966004252433777,55.041746727745476,False
+re-anclada,El rey gobierna con justicia.,4,latín,Rex iustissime regnat.,El rey gobierna justamente.,0.797980546951294,55.803424337313125,False
+re-anclada,El rey gobierna con justicia.,5,coreano,왕은 공정하게 통치하고 있다.,El rey gobierna de manera justa.,0.912606954574585,55.041746727745476,False
+re-anclada,El rey gobierna con justicia.,6,hindi,राजा निष्पक्षता से शासन कर रहे हैं।,El rey gobierna de manera justa.,0.9135735034942627,55.041746727745476,False
+re-anclada,Los pájaros cantan en el árbol.,1,latín,Aves in arbores cantant.,Los pájaros cantan en los árboles.,0.8452941179275513,75.93457375979249,False
+re-anclada,Los pájaros cantan en el árbol.,2,coreano,새들은 나무에 노래한다.,Los pájaros cantan en los árboles.,0.916846752166748,75.93457375979249,False
+re-anclada,Los pájaros cantan en el árbol.,3,hindi,पक्षी पेड़ पर गा रहे हैं।,Los pájaros están cantando en el árbol.,0.9410820007324219,73.23023919074103,False
+re-anclada,Los pájaros cantan en el árbol.,4,latín,Aves in arbores cantant.,Los pájaros cantan en los árboles.,0.8452941179275513,75.93457375979249,False
+re-anclada,Los pájaros cantan en el árbol.,5,coreano,새들은 나무에 노래한다.,Los pájaros cantan en los árboles.,0.916846752166748,75.93457375979249,False
+re-anclada,Los pájaros cantan en el árbol.,6,hindi,पक्षी पेड़ पर गा रहे हैं।,Los pájaros están cantando en el árbol.,0.9410820007324219,73.23023919074103,False
+re-anclada,¿Dónde está la estación de autobuses?,1,latín,Ubi est statio bus?,¿Dónde está la parada de autobús?,0.9168309569358826,50.3967436480246,False
+re-anclada,¿Dónde está la estación de autobuses?,2,coreano,버스 정류장은 어디에 있나요?,¿Dónde está la parada del autobús?,0.9598759412765503,44.71638592236409,False
+re-anclada,¿Dónde está la estación de autobuses?,3,hindi,बस स्टॉप कहाँ स्थित है?,¿Dónde se encuentra la parada de autobús?,0.9391542673110962,35.30013227075231,False
+re-anclada,¿Dónde está la estación de autobuses?,4,latín,Ubi est statio bus?,¿Dónde está la parada de autobús?,0.9168309569358826,50.3967436480246,False
+re-anclada,¿Dónde está la estación de autobuses?,5,coreano,버스 정류장은 어디에 있나요?,¿Dónde está la parada del autobús?,0.9598759412765503,44.71638592236409,False
+re-anclada,¿Dónde está la estación de autobuses?,6,hindi,बस स्टॉप कहाँ स्थित है?,¿Dónde se encuentra la parada de autobús?,0.9391542673110962,35.30013227075231,False
