@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+# Descargas de OPUS: se bajan solas con opus.py (~36 MB)
+datos_opus/zips/
+# Se generan en Colab (y se guardan en Drive)
+adaptador_latin/
+salidas/

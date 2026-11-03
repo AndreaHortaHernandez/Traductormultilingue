@@ -1,0 +1,9 @@
+torch
+transformers
+sentencepiece
+protobuf
+sentence-transformers
+sacrebleu
+pandas
+matplotlib
+peft
