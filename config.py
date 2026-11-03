@@ -121,7 +121,10 @@ USAR_ADAPTADOR_LATIN = True     # si existe el adaptador, se usa en los pasos co
 LORA_RANGO = 16
 LORA_ALFA = 32
 LORA_DROPOUT = 0.05
-MAX_PARES_ENTRENAMIENTO = 4000  # x2 direcciones; ~30-40 min en una T4
+# En una T4 cada paso tarda ~13 s (bfloat16 es lento en esa GPU): 1,500 pares
+# x 2 direcciones = 375 pasos ~ 80 min. Con 4,000 pares eran ~3.5 h, demasiado
+# para Colab gratuito.
+MAX_PARES_ENTRENAMIENTO = 1500
 EPOCAS_AFINADO = 1
 TAM_LOTE_AFINADO = 4
 PASOS_ACUMULACION = 2           # lote efectivo = 8

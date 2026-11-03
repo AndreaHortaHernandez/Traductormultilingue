@@ -85,7 +85,7 @@ Ninguna frase de prueba (ni sus otras traducciones) aparece en el entrenamiento.
 así que se afina TranslateGemma con los pares de OPUS. LoRA congela los 4,300
 millones de parámetros y entrena solo dos matrices pequeñas junto a cada
 proyección de atención (q, k, v, o): `W' = W + B·A·(α/r)`, con r = 16 (~0.3 %
-de los parámetros). Se entrena en las dos direcciones (es→la, la→es) con
+de los parámetros), con los primeros 1,500 pares (para que quepa en ~80 min de una T4). Se entrena en las dos direcciones (es→la, la→es) con
 entropía cruzada solo sobre los tokens de la traducción. El adaptador se
 activa únicamente en los pasos con latín; coreano e hindi usan el modelo
 original.
@@ -120,7 +120,7 @@ latín se compara el modelo base contra el afinado.
 2. **Entorno de ejecución → Cambiar tipo de entorno de ejecución → GPU (T4)**.
 3. **Entorno de ejecución → Ejecutar todas**. El notebook clona este repo,
    instala las librerías, afina el latín, traduce una frase de ejemplo y corre
-   las dos evaluaciones. En total ~1.5-2 h en una T4 gratuita.
+   las dos evaluaciones. En total ~2.5-3 h en una T4 gratuita (el fine-tuning es ~80 min).
 4. Quien entrene el adaptador de latín lo sube al repo con la sección 10
    (junto con las métricas de `salidas/`). Desde ahí, a los demás el notebook
    se lo trae al clonar y **se salta el entrenamiento**.
