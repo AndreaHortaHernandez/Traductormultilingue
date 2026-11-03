@@ -121,10 +121,9 @@ latín se compara el modelo base contra el afinado.
 3. **Entorno de ejecución → Ejecutar todas**. El notebook clona este repo,
    instala las librerías, afina el latín, traduce una frase de ejemplo y corre
    las dos evaluaciones. En total ~1.5-2 h en una T4 gratuita.
-4. La sección 3 guarda el avance en Google Drive: si Colab se desconecta,
-   volver a ejecutar todo continúa desde el último guardado. Si alguien del
-   equipo ya entrenó el adaptador, puede compartir su carpeta `traductor_p1`
-   de Drive y los demás se saltan el entrenamiento.
+4. Quien entrene el adaptador de latín lo sube al repo con la sección 10
+   (junto con las métricas de `salidas/`). Desde ahí, a los demás el notebook
+   se lo trae al clonar y **se salta el entrenamiento**.
 5. En la sección 7 se cambia la frase y el orden de idiomas para probar otras.
 
 Para guardar cambios al notebook en el repo: **Archivo → Guardar una copia en GitHub**.
