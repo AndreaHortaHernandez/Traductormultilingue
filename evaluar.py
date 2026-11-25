@@ -15,6 +15,7 @@ Métricas por paso (promedio sobre las frases):
 """
 
 import time
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -30,9 +31,19 @@ MODOS = {
 }
 
 
-def leer_frases() -> list[str]:
-    lineas = config.RUTA_FRASES_PRUEBA.read_text(encoding="utf-8").splitlines()
+def leer_frases(ruta: Path = config.RUTA_FRASES_PRUEBA) -> list[str]:
+    lineas = Path(ruta).read_text(encoding="utf-8").splitlines()
     return [linea.strip() for linea in lineas if linea.strip()]
+
+
+def _rutas_salida(ruta_frases: Path) -> tuple[Path, Path, Path]:
+    """Con frases_prueba.txt se usan los nombres de siempre; con otro archivo
+    (p. ej. frases_complejas.txt) se agrega un sufijo para no pisarlos."""
+    rutas = (config.RUTA_RESULTADOS_CSV, config.RUTA_RESUMEN_CSV, config.RUTA_GRAFICA)
+    if ruta_frases.resolve() == config.RUTA_FRASES_PRUEBA.resolve():
+        return rutas
+    sufijo = "_" + ruta_frases.stem.removeprefix("frases_")
+    return tuple(r.with_name(r.stem + sufijo + r.suffix) for r in rutas)
 
 
 def evaluar(
@@ -40,11 +51,17 @@ def evaluar(
     limite: int | None = None,
     traductor: Traductor | None = None,
     verificador: Verificador | None = None,
+    ruta_frases: str | Path = config.RUTA_FRASES_PRUEBA,
 ) -> pd.DataFrame:
     """Si ya hay modelos cargados (p. ej. en el notebook de Colab) se pasan
-    aquí para no cargarlos dos veces en la GPU."""
+    aquí para no cargarlos dos veces en la GPU. Con ruta_frases se evalúa
+    otro archivo (relativo a la carpeta del proyecto, p. ej. frases_complejas.txt)."""
     cadena = cadena or config.CADENA_POR_DEFECTO
-    frases = leer_frases()[:limite]
+    ruta_frases = Path(ruta_frases)
+    if not ruta_frases.is_absolute():
+        ruta_frases = config.RAIZ / ruta_frases
+    frases = leer_frases(ruta_frases)[:limite]
+    ruta_resultados, ruta_resumen, ruta_grafica = _rutas_salida(ruta_frases)
     config.RUTA_SALIDAS.mkdir(parents=True, exist_ok=True)
 
     traductor = traductor or Traductor()
@@ -71,7 +88,7 @@ def evaluar(
                 })
 
     resultados = pd.DataFrame(filas)
-    resultados.to_csv(config.RUTA_RESULTADOS_CSV, index=False, encoding="utf-8-sig")
+    resultados.to_csv(ruta_resultados, index=False, encoding="utf-8-sig")
 
     resumen = (
         resultados.assign(arriba_umbral=resultados["similitud"] >= config.UMBRAL_SIMILITUD)
@@ -86,17 +103,16 @@ def evaluar(
         .reset_index()
     )
     resumen[["pct_arriba_umbral", "pct_corregidos"]] *= 100
-    resumen.to_csv(config.RUTA_RESUMEN_CSV, index=False, encoding="utf-8-sig")
+    resumen.to_csv(ruta_resumen, index=False, encoding="utf-8-sig")
 
     print("\n=== Resumen por paso ===")
     print(resumen.to_string(index=False, float_format="{:.3f}".format))
-    _graficar(resumen, cadena)
-    print(f"\nResultados en '{config.RUTA_RESULTADOS_CSV}', '{config.RUTA_RESUMEN_CSV}' "
-          f"y '{config.RUTA_GRAFICA}'")
+    _graficar(resumen, cadena, ruta_grafica)
+    print(f"\nResultados en '{ruta_resultados}', '{ruta_resumen}' y '{ruta_grafica}'")
     return resumen
 
 
-def _graficar(resumen: pd.DataFrame, cadena: list[str]) -> None:
+def _graficar(resumen: pd.DataFrame, cadena: list[str], ruta: Path = config.RUTA_GRAFICA) -> None:
     fig, eje = plt.subplots(figsize=(8, 4.5))
     for modo, datos in resumen.groupby("modo", sort=False):
         eje.plot(datos["paso"], datos["similitud_media"], marker="o", label=f"Cadena {modo}")
@@ -109,7 +125,7 @@ def _graficar(resumen: pd.DataFrame, cadena: list[str]) -> None:
     eje.set_title("¿La frase sigue significando lo mismo?")
     eje.legend()
     fig.tight_layout()
-    fig.savefig(config.RUTA_GRAFICA, dpi=150)
+    fig.savefig(ruta, dpi=150)
     plt.close(fig)
 
 

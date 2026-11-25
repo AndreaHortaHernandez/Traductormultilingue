@@ -5,7 +5,7 @@ Punto de entrada único del traductor en cadena.
     python Traductor.py traducir "El perro duerme." --cadena la ko hi ko la
     python Traductor.py interactivo
     python Traductor.py interfaz [--compartir]   # interfaz web (Gradio)
-    python Traductor.py evaluar [--limite 5]
+    python Traductor.py evaluar [--limite 5] [--frases frases_complejas.txt]
     python Traductor.py opus          # descarga y prepara los datos de OPUS
     python Traductor.py afinar        # fine-tuning del latín con OPUS (necesita GPU)
     python Traductor.py evaluar_opus  # BLEU / chrF++ contra traducciones humanas
@@ -44,6 +44,8 @@ def main():
     p_evaluar = sub.add_parser("evaluar", help="Mide la conservación del significado con frases_prueba.txt.")
     p_evaluar.add_argument("--cadena", nargs="+")
     p_evaluar.add_argument("--limite", type=int, help="Usar solo las primeras N frases.")
+    p_evaluar.add_argument("--frases", default=str(config.RUTA_FRASES_PRUEBA),
+                           help="Archivo de frases, ej. frases_complejas.txt.")
 
     p_interfaz = sub.add_parser("interfaz", help="Abre la interfaz web (Gradio).")
     p_interfaz.add_argument("--compartir", action="store_true", help="Crea un enlace público temporal.")
@@ -75,7 +77,7 @@ def main():
 
     if args.comando == "evaluar":
         import evaluar
-        evaluar.evaluar(cadena, args.limite)
+        evaluar.evaluar(cadena, args.limite, ruta_frases=args.frases)
         return
 
     from cadena import imprimir_pasos, traducir_en_cadena
