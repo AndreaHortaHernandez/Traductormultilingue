@@ -61,7 +61,14 @@ En cada paso de la cadena (`cadena.py`):
 2. LaBSE compara cada candidata con la frase **original en español**, no solo
    con la del paso anterior, y se elige la más parecida. Así cada paso se
    re-ancla al significado original y el error no se acumula.
-3. Si aun así la mejor queda debajo del umbral (`UMBRAL_SIMILITUD = 0.75`),
+3. **Ida y vuelta**: LaBSE casi no distingue matices de registro ("quiero" vs
+   "quisiera" / "me gustaría" son la misma idea para él), y en coreano el
+   modelo tiende a la forma cortés (`싶어요`), que regresa como "me gustaría".
+   Por eso cada candidata también se traduce de vuelta al español y su
+   puntaje es `LaBSE + 0.5 × chrF(regreso, original) / 100`
+   (`PESO_IDA_Y_VUELTA`): gana la que significa lo mismo **y** regresa con las
+   mismas palabras (`싶다` → "quiero"). El umbral sigue usando solo LaBSE.
+4. Si aun así la mejor queda debajo del umbral (`UMBRAL_SIMILITUD = 0.75`),
    también se traduce desde el español original y se elige la mejor de todas;
    el paso se marca como **corregido** en la salida.
 
@@ -108,7 +115,8 @@ latín se compara el modelo base contra el afinado.
 | `evaluar_opus.py` | BLEU / chrF++ contra las traducciones humanas de OPUS. |
 | `evaluar.py` | Compara la cadena ingenua contra la re-anclada sobre `frases_prueba.txt`. |
 | `datos_opus/` | Conjuntos de prueba y entrenamiento ya preparados (TSV). |
-| `Traductor.py` | Punto de entrada único (`traducir` / `interactivo` / `evaluar`). |
+| `Traductor.py` | Punto de entrada único (`traducir` / `interactivo` / `interfaz` / `evaluar`). |
+| `interfaz.py` | Interfaz web con Gradio: frase, cadena, parámetros, tabla paso a paso y gráfica. |
 | `frases_prueba.txt` | 20 frases en español para la evaluación. |
 | `colab/Traductor_Colab.ipynb` | Notebook para Colab con GPU; trae todo el código adentro. |
 | `salidas/` | Resultados de la evaluación (CSV y gráfica). |
@@ -121,10 +129,13 @@ latín se compara el modelo base contra el afinado.
 3. **Entorno de ejecución → Ejecutar todas**. El notebook clona este repo,
    instala las librerías, afina el latín, traduce una frase de ejemplo y corre
    las dos evaluaciones. En total ~2.5-3 h en una T4 gratuita (el fine-tuning es ~80 min).
-4. Quien entrene el adaptador de latín lo sube al repo con la sección 10
+4. Quien entrene el adaptador de latín lo sube al repo con la sección 11
    (junto con las métricas de `salidas/`). Desde ahí, a los demás el notebook
    se lo trae al clonar y **se salta el entrenamiento**.
 5. En la sección 7 se cambia la frase y el orden de idiomas para probar otras.
+6. La sección 10 abre la **interfaz web** (abajo en la celda y con un enlace público
+   `*.gradio.live`). Si solo quieres la interfaz, desmarca las casillas de las
+   evaluaciones (secciones 8 y 9) antes de *Ejecutar todas*: queda lista en ~10 min.
 
 Para guardar cambios al notebook en el repo: **Archivo → Guardar una copia en GitHub**.
 
@@ -136,6 +147,8 @@ python -m pip install -r requirements.txt
 python Traductor.py traducir "El perro duerme bajo la mesa."
 python Traductor.py traducir "El perro duerme bajo la mesa." --cadena hi la ko la
 python Traductor.py interactivo
+python Traductor.py interfaz               # http://127.0.0.1:7860
+python Traductor.py interfaz --compartir   # además, un enlace público temporal
 python Traductor.py evaluar              # tarda: 20 frases x 2 modos
 python Traductor.py evaluar --limite 5   # versión rápida
 ```
@@ -144,6 +157,23 @@ La primera vez se descargan los modelos (~8.6 GB TranslateGemma + ~2 GB
 LaBSE) a la caché de Hugging Face. Corre en CPU en float32 (necesita ~20 GB
 de RAM libre; ~20 s por paso, ~4 min una cadena de 6 pasos); con GPU es mucho
 más rápido.
+
+## Interfaz web
+
+`interfaz.py` (Gradio) recibe la frase y la cadena de idiomas, que se pueden
+escribir como códigos o como nombres, con o sin acento: `la ko hi`,
+`latín coreano hindi` o `latin -> coreano`. Muestra cada paso con su traducción,
+su regreso al español, la similitud LaBSE y si se corrigió, además de una gráfica
+de la similitud por paso. En **Parámetros** se cambian los candidatos, el peso de
+ida y vuelta y el umbral solo para esa consulta, sin tocar `config.py`. También se
+puede comparar contra la cadena ingenua.
+
+**Acentos:** todo el texto es Unicode y los modelos lo reciben en UTF-8, así que
+los acentos, la ñ y ¿¡ funcionan igual que cualquier otra letra. La frase se
+normaliza a NFC (`cadena.py`), porque un acento "descompuesto" (e + ´, común al
+pegar desde PDFs o Mac) se ve igual pero son otros caracteres, y el chrF de ida y
+vuelta lo contaría como diferencia. En la consola de Windows, `Traductor.py`
+fuerza la salida a UTF-8 para poder imprimir coreano e hindi.
 
 ## Evaluación
 
@@ -157,6 +187,12 @@ Y reporta por paso: similitud LaBSE media y mínima con el original, % de
 salidas arriba del umbral, **chrF** de la traducción de vuelta al español
 contra la original (métrica de traducción automática independiente de LaBSE)
 y % de pasos corregidos.
+
+**Ojo:** con la ida y vuelta (paso 3 de la cadena re-anclada) el chrF de
+regreso también se usa para *elegir* candidatas, así que en la cadena
+re-anclada ya no es una métrica independiente: su mejora se debe en parte a
+que se optimiza directamente. Para comparar contra los resultados de abajo
+(medidos antes de este cambio) se puede correr con `PESO_IDA_Y_VUELTA = 0`.
 
 ## Resultados (Colab, GPU T4)
 

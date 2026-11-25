@@ -4,6 +4,7 @@ Punto de entrada único del traductor en cadena.
     python Traductor.py traducir "El perro duerme bajo la mesa."
     python Traductor.py traducir "El perro duerme." --cadena la ko hi ko la
     python Traductor.py interactivo
+    python Traductor.py interfaz [--compartir]   # interfaz web (Gradio)
     python Traductor.py evaluar [--limite 5]
     python Traductor.py opus          # descarga y prepara los datos de OPUS
     python Traductor.py afinar        # fine-tuning del latín con OPUS (necesita GPU)
@@ -11,6 +12,7 @@ Punto de entrada único del traductor en cadena.
 """
 
 import argparse
+import sys
 
 import config
 
@@ -24,6 +26,11 @@ def _cadena(argumento: list[str] | None) -> list[str]:
 
 
 def main():
+    # La consola de Windows (cp1252) no puede imprimir coreano ni hindi.
+    for flujo in (sys.stdout, sys.stderr):
+        if hasattr(flujo, "reconfigure"):
+            flujo.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(description="Traductor en cadena español -> latín / coreano / hindi.")
     sub = parser.add_subparsers(dest="comando", required=True)
 
@@ -38,12 +45,19 @@ def main():
     p_evaluar.add_argument("--cadena", nargs="+")
     p_evaluar.add_argument("--limite", type=int, help="Usar solo las primeras N frases.")
 
+    p_interfaz = sub.add_parser("interfaz", help="Abre la interfaz web (Gradio).")
+    p_interfaz.add_argument("--compartir", action="store_true", help="Crea un enlace público temporal.")
+
     sub.add_parser("opus", help="Descarga y prepara los datos de OPUS.")
     sub.add_parser("afinar", help="Fine-tuning del latín con los datos de OPUS (GPU).")
     sub.add_parser("evaluar_opus", help="BLEU / chrF++ contra las traducciones humanas de OPUS.")
 
     args = parser.parse_args()
 
+    if args.comando == "interfaz":
+        import interfaz
+        interfaz.lanzar(compartir=args.compartir, bloquear=True)
+        return
     if args.comando == "opus":
         import opus
         opus.preparar()

@@ -7,3 +7,4 @@ sacrebleu
 pandas
 matplotlib
 peft
+gradio

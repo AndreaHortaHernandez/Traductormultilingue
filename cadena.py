@@ -15,12 +15,22 @@ lo mismo, en cada paso:
 3. Si aun así la mejor queda debajo de config.UMBRAL_SIMILITUD y
    config.CORREGIR_DERIVA está activo, también se traduce desde el español
    original y se elige la mejor de todas; el paso queda marcado "corregido".
+
+Ida y vuelta: LaBSE no distingue "quiero" de "quisiera / me gustaría", así
+que con config.PESO_IDA_Y_VUELTA > 0 cada candidata se traduce además de
+vuelta al español y se premia la que regresa con las mismas palabras que la
+original (chrF). Así no se cuela, p. ej., la forma cortés del coreano.
 """
 
+import unicodedata
 from dataclasses import dataclass
+
+from sacrebleu.metrics import CHRF
 
 import config
 from modelos import Traductor, Verificador
+
+_CHRF = CHRF()
 
 
 @dataclass
@@ -42,32 +52,62 @@ def traducir_en_cadena(
     con_regreso: bool = True,
     num_candidatos: int = config.NUM_CANDIDATOS,
     corregir_deriva: bool = config.CORREGIR_DERIVA,
+    peso_ida_y_vuelta: float | None = None,
+    umbral: float | None = None,
 ) -> list[Paso]:
     """
     Con num_candidatos=1 y corregir_deriva=False es la cadena "ingenua" (cada
     paso solo traduce la salida anterior, sin verificar); evaluar.py la usa
     como línea base para comparar.
+
+    peso_ida_y_vuelta y umbral valen por defecto lo de config; la interfaz los
+    cambia por consulta sin tocar config.
     """
+    peso = config.PESO_IDA_Y_VUELTA if peso_ida_y_vuelta is None else peso_ida_y_vuelta
+    umbral = config.UMBRAL_SIMILITUD if umbral is None else umbral
+    # Acentos "descompuestos" (e + ´, común al pegar desde PDFs o Mac) se ven
+    # igual pero son otros caracteres; en NFC "é" es un solo carácter y el
+    # chrF de ida y vuelta no los cuenta como diferencias.
+    frase = unicodedata.normalize("NFC", frase).strip()
     pasos = []
     texto_actual, idioma_actual = frase, config.IDIOMA_ORIGEN
+    # Con un solo candidato no hay nada que elegir: la cadena ingenua no cambia.
+    ida_y_vuelta = num_candidatos > 1 and peso > 0
+
+    def puntuar(candidatos: list[str], idioma: str):
+        """Similitud LaBSE con el original, puntaje para elegir y, si se usa
+        ida y vuelta, el regreso al español de cada candidata."""
+        similitudes = verificador.similitudes(frase, candidatos)
+        if not ida_y_vuelta:
+            return similitudes, similitudes, None
+        regresos = traductor.traducir_lote(candidatos, idioma, config.IDIOMA_ORIGEN)
+        puntajes = [
+            s + peso * _CHRF.sentence_score(r, [frase]).score / 100
+            for s, r in zip(similitudes, regresos)
+        ]
+        return similitudes, puntajes, regresos
 
     for numero, idioma_destino in enumerate(cadena, start=1):
         candidatos = traductor.traducir(texto_actual, idioma_actual, idioma_destino, num_candidatos)
-        similitudes = verificador.similitudes(frase, candidatos)
-        mejor = max(range(len(candidatos)), key=similitudes.__getitem__)
+        similitudes, puntajes, regresos = puntuar(candidatos, idioma_destino)
+        mejor = max(range(len(candidatos)), key=puntajes.__getitem__)
         corregido = False
 
-        if similitudes[mejor] < config.UMBRAL_SIMILITUD and corregir_deriva:
+        if similitudes[mejor] < umbral and corregir_deriva:
             desde_original = traductor.traducir(
                 frase, config.IDIOMA_ORIGEN, idioma_destino, num_candidatos,
             )
             nuevos = [c for c in desde_original if c not in candidatos]
-            nuevas_similitudes = verificador.similitudes(frase, nuevos) if nuevos else []
-            if nuevos and max(nuevas_similitudes) > similitudes[mejor]:
-                candidatos += nuevos
-                similitudes += nuevas_similitudes
-                mejor = max(range(len(candidatos)), key=similitudes.__getitem__)
-                corregido = True
+            if nuevos:
+                n_similitudes, n_puntajes, n_regresos = puntuar(nuevos, idioma_destino)
+                if max(n_similitudes) > similitudes[mejor]:
+                    candidatos += nuevos
+                    similitudes += n_similitudes
+                    puntajes = puntajes + n_puntajes if ida_y_vuelta else similitudes
+                    if regresos is not None:
+                        regresos += n_regresos
+                    mejor = max(range(len(candidatos)), key=puntajes.__getitem__)
+                    corregido = True
 
         paso = Paso(
             numero=numero,
@@ -77,7 +117,9 @@ def traducir_en_cadena(
             similitud=similitudes[mejor],
             corregido=corregido,
         )
-        if con_regreso:
+        if regresos is not None:
+            paso.regreso_es = regresos[mejor]
+        elif con_regreso:
             paso.regreso_es = traductor.traducir(paso.texto, idioma_destino, config.IDIOMA_ORIGEN)[0]
         pasos.append(paso)
 

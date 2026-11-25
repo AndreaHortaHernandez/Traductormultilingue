@@ -84,6 +84,16 @@ UMBRAL_SIMILITUD = 0.75
 # anterior) y solo se avisa de la pérdida.
 CORREGIR_DERIVA = True
 
+# Ida y vuelta: LaBSE casi no distingue matices de registro o modo ("quiero"
+# vs "quisiera" / "me gustaría"): para él son la misma idea. Por eso, al
+# elegir entre candidatos, cada uno se traduce también de vuelta al español y
+# se suma PESO_IDA_Y_VUELTA x chrF(regreso, original) / 100 a su similitud
+# LaBSE. Gana el candidato que, además de significar lo mismo, regresa con las
+# mismas palabras (p. ej. en coreano "싶다" -> "quiero" en vez de "싶어요" ->
+# "me gustaría"). El umbral y la similitud reportada siguen siendo solo LaBSE.
+# Con 0 se desactiva (y no se traducen de vuelta todos los candidatos).
+PESO_IDA_Y_VUELTA = 0.5
+
 # =========================================================
 # DATOS DE OPUS (https://opus.nlpl.eu) — corpus paralelos: frases con su traducción
 # =========================================================
