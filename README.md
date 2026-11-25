@@ -160,9 +160,11 @@ más rápido.
 
 ## Interfaz web
 
-`interfaz.py` (Gradio) recibe la frase y la cadena de idiomas, que se pueden
-escribir como códigos o como nombres, con o sin acento: `la ko hi`,
-`latín coreano hindi` o `latin -> coreano`. Muestra cada paso con su traducción,
+`interfaz.py` (Gradio) recibe la frase y los idiomas a los que se traduce: se
+eligen con botones (**+ latín**, **+ coreano**, **+ hindi**) en el orden que se
+quiera, y con uno solo se traduce directo a ese idioma. Hay atajos para la
+cadena completa o una vuelta, y también se puede escribir como códigos o
+nombres, con o sin acento (`la ko hi`, `latín → coreano`). Muestra cada paso con su traducción,
 su regreso al español, la similitud LaBSE y si se corrigió, además de una gráfica
 de la similitud por paso. En **Parámetros** se cambian los candidatos, el peso de
 ida y vuelta y el umbral solo para esa consulta, sin tocar `config.py`. También se

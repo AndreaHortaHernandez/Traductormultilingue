@@ -13,6 +13,7 @@ están cargados, para no ocupar la GPU dos veces:
 
 import sys
 import time
+from functools import partial
 import unicodedata
 
 import gradio as gr
@@ -55,6 +56,11 @@ def leer_cadena(texto: str) -> list[str]:
     if not cadena:
         raise gr.Error("Escribe al menos un idioma para la cadena.")
     return cadena
+
+
+def texto_cadena(cadena: list[str]) -> str:
+    """["la", "ko"] -> "latín → coreano" (lo que se muestra en el cuadro)."""
+    return " → ".join(config.IDIOMAS[c] for c in cadena)
 
 
 def _tabla(pasos, umbral: float) -> pd.DataFrame:
@@ -147,9 +153,25 @@ def crear_interfaz(traductor, verificador) -> gr.Blocks:
                     value="Quiero aprender a tocar la guitarra.",
                 )
                 cadena = gr.Textbox(
-                    label="Cadena de idiomas", value=" ".join(config.CADENA_POR_DEFECTO),
-                    info="Códigos o nombres separados por espacio: la / latín, ko / coreano, hi / hindi.",
+                    label="Idiomas a los que se traduce, en orden",
+                    value=texto_cadena(config.CADENA_POR_DEFECTO),
+                    info="Da clic en los idiomas en el orden que quieras; con uno solo se traduce directo a ese "
+                         "idioma. También se puede escribir (la / latín, ko / coreano, hi / hindi).",
                 )
+                with gr.Row():
+                    botones_idioma = {
+                        codigo: gr.Button(f"+ {config.IDIOMAS[codigo]}", size="sm")
+                        for codigo in config.IDIOMAS_DESTINO
+                    }
+                    deshacer = gr.Button("↶ Quitar el último", size="sm")
+                    limpiar = gr.Button("Borrar", size="sm")
+                with gr.Row():
+                    gr.Markdown("Atajos:")
+                    atajos = {
+                        "Cadena completa (6 pasos)": config.CADENA_POR_DEFECTO,
+                        "Una vuelta (3 pasos)": config.IDIOMAS_DESTINO,
+                    }
+                    botones_atajo = {nombre: gr.Button(nombre, size="sm") for nombre in atajos}
             with gr.Column(scale=2):
                 with gr.Accordion("Parámetros", open=False):
                     num_candidatos = gr.Slider(
@@ -172,11 +194,31 @@ def crear_interfaz(traductor, verificador) -> gr.Blocks:
         grafica = gr.Plot(label="Similitud por paso")
         tabla = gr.Dataframe(headers=COLUMNAS, label="Paso a paso", wrap=True, interactive=False)
 
+        def agregar(actual, codigo):
+            try:
+                previa = leer_cadena(actual) if actual.strip() else []
+            except gr.Error:
+                previa = []  # si lo escrito no se entiende, se empieza de nuevo
+            return texto_cadena([*previa, codigo])
+
+        def quitar_ultimo(actual):
+            try:
+                return texto_cadena(leer_cadena(actual)[:-1])
+            except gr.Error:
+                return ""
+
+        for codigo, boton_idioma in botones_idioma.items():
+            boton_idioma.click(partial(agregar, codigo=codigo), cadena, cadena, api_name=f"agregar_{codigo}")
+        deshacer.click(quitar_ultimo, cadena, cadena, api_name="quitar_ultimo")
+        limpiar.click(lambda: "", None, cadena, api_name="borrar")
+        for nombre, boton_atajo in botones_atajo.items():
+            boton_atajo.click(partial(texto_cadena, atajos[nombre]), None, cadena, api_name=False)
+
         entradas = [frase, cadena, num_candidatos, peso, umbral, corregir, comparar]
         salidas = [resumen, tabla, grafica]
         # Un solo modelo en la GPU: las consultas se atienden de una en una.
-        boton.click(traducir, entradas, salidas, concurrency_limit=1)
-        frase.submit(traducir, entradas, salidas, concurrency_limit=1)
+        boton.click(traducir, entradas, salidas, concurrency_limit=1, api_name="traducir")
+        frase.submit(traducir, entradas, salidas, concurrency_limit=1, api_name=False)
     return demo
 
 
