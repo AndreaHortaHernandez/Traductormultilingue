@@ -114,6 +114,8 @@ latín se compara el modelo base contra el afinado.
 | `afinar_latin.py` | Fine-tuning del latín con LoRA (necesita GPU). |
 | `evaluar_opus.py` | BLEU / chrF++ contra las traducciones humanas de OPUS. |
 | `evaluar.py` | Compara la cadena ingenua contra la re-anclada sobre `frases_prueba.txt`. |
+| `comparar.py` | Compara 4 configuraciones (con/sin adaptador, umbral, candidatos) sobre `frases_complejas.txt`, sin entrenar. |
+| `frases_complejas.txt` | 20 frases con subjuntivo, condicionales, negaciones, modismos y vocabulario moderno. |
 | `datos_opus/` | Conjuntos de prueba y entrenamiento ya preparados (TSV). |
 | `Traductor.py` | Punto de entrada único (`traducir` / `interactivo` / `interfaz` / `evaluar`). |
 | `interfaz.py` | Interfaz web con Gradio: frase, cadena, parámetros, tabla paso a paso y gráfica. |

@@ -5,6 +5,7 @@ Punto de entrada único del traductor en cadena.
     python Traductor.py traducir "El perro duerme." --cadena la ko hi ko la
     python Traductor.py interactivo
     python Traductor.py interfaz [--compartir]   # interfaz web (Gradio)
+    python Traductor.py comparar [--limite 10]   # compara configuraciones con frases complejas
     python Traductor.py evaluar [--limite 5] [--frases frases_complejas.txt]
     python Traductor.py opus          # descarga y prepara los datos de OPUS
     python Traductor.py afinar        # fine-tuning del latín con OPUS (necesita GPU)
@@ -47,6 +48,10 @@ def main():
     p_evaluar.add_argument("--frases", default=str(config.RUTA_FRASES_PRUEBA),
                            help="Archivo de frases, ej. frases_complejas.txt.")
 
+    p_comparar = sub.add_parser("comparar", help="Compara configuraciones sobre las mismas frases (sin entrenar).")
+    p_comparar.add_argument("--frases", default="frases_complejas.txt")
+    p_comparar.add_argument("--limite", type=int)
+
     p_interfaz = sub.add_parser("interfaz", help="Abre la interfaz web (Gradio).")
     p_interfaz.add_argument("--compartir", action="store_true", help="Crea un enlace público temporal.")
 
@@ -56,6 +61,10 @@ def main():
 
     args = parser.parse_args()
 
+    if args.comando == "comparar":
+        import comparar
+        comparar.comparar(ruta_frases=args.frases, limite=args.limite)
+        return
     if args.comando == "interfaz":
         import interfaz
         interfaz.lanzar(compartir=args.compartir, bloquear=True)
