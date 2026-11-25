@@ -191,8 +191,9 @@ y % de pasos corregidos.
 **Ojo:** con la ida y vuelta (paso 3 de la cadena re-anclada) el chrF de
 regreso también se usa para *elegir* candidatas, así que en la cadena
 re-anclada ya no es una métrica independiente: su mejora se debe en parte a
-que se optimiza directamente. Para comparar contra los resultados de abajo
-(medidos antes de este cambio) se puede correr con `PESO_IDA_Y_VUELTA = 0`.
+que se optimiza directamente. Por eso abajo se reporta junto a la similitud
+LaBSE, que sí sigue siendo independiente, y contra la corrida anterior sin ida y
+vuelta (`PESO_IDA_Y_VUELTA = 0`).
 
 ## Resultados (Colab, GPU T4)
 
@@ -205,15 +206,16 @@ Contra las traducciones humanas de prueba (`salidas/metricas_opus.csv`):
 
 | Dirección | Frases | BLEU base | BLEU afinado | chrF++ base | chrF++ afinado |
 |---|---|---|---|---|---|
-| español → latín | 300 (Tatoeba) | 16.1 | **24.1** | 36.8 | **42.4** |
-| latín → español | 300 (Tatoeba) | 30.7 | **37.5** | 50.2 | **55.1** |
-| español → coreano | 200 (TED2020) | 13.3 | — | 24.1 | — |
-| coreano → español | 200 (TED2020) | 18.6 | — | 43.5 | — |
-| español → hindi | 200 (TED2020) | 21.2 | — | 41.2 | — |
-| hindi → español | 200 (TED2020) | 24.4 | — | 48.7 | — |
+| español → latín | 300 (Tatoeba) | 16.0 | **24.5** | 36.7 | **42.7** |
+| latín → español | 300 (Tatoeba) | 30.8 | **37.3** | 50.3 | **54.9** |
+| español → coreano | 200 (TED2020) | 13.8 | — | 24.7 | — |
+| coreano → español | 200 (TED2020) | 18.7 | — | 43.5 | — |
+| español → hindi | 200 (TED2020) | 21.0 | — | 41.2 | — |
+| hindi → español | 200 (TED2020) | 24.2 | — | 48.7 | — |
 
-El fine-tuning sube el latín unos 7-8 puntos de BLEU y 5-6 de chrF++ en las dos
-direcciones. **Ojo al interpretarlo**: las frases de prueba son de Tatoeba,
+El fine-tuning sube el latín unos 6.5-8.5 puntos de BLEU y 4.5-6 de chrF++ en las
+dos direcciones. Una segunda corrida en Colab dio lo mismo con diferencias de
+±0.5 (versiones de las librerías). **Ojo al interpretarlo**: las frases de prueba son de Tatoeba,
 igual que buena parte del entrenamiento, así que parte de la mejora es que el
 modelo aprendió el estilo de Tatoeba (orden de palabras, nombres latinizados
 como *Thoma*), no solo mejor latín; en algunas frases el afinado comete
@@ -224,24 +226,59 @@ no son comparables con los del latín.
 ### Cadena de 6 pasos: ingenua vs re-anclada
 
 20 frases, cadena latín → coreano → hindi → latín → coreano → hindi
-(`salidas/resumen_por_paso.csv`, `salidas/similitud_por_paso.png`):
+(`salidas/resumen_por_paso.csv`, `salidas/similitud_por_paso.png`). La
+re-anclada es la actual, con ida y vuelta (`PESO_IDA_Y_VUELTA = 0.5`):
 
 | Paso | Idioma | Similitud ingenua | Similitud re-anclada | % arriba del umbral (ingenua → re-anclada) |
 |---|---|---|---|---|
-| 1 | latín | 0.742 | **0.847** | 55 % → **90 %** |
-| 2 | coreano | 0.857 | **0.913** | 85 % → **100 %** |
-| 3 | hindi | 0.871 | **0.922** | 90 % → **100 %** |
-| 4 | latín | 0.733 | **0.840** | 50 % → **95 %** |
-| 5 | coreano | 0.840 | **0.913** | 85 % → **100 %** |
-| 6 | hindi | 0.858 | **0.919** | 90 % → **100 %** |
+| 1 | latín | 0.742 | **0.846** | 55 % → **90 %** |
+| 2 | coreano | 0.857 | **0.909** | 85 % → **100 %** |
+| 3 | hindi | 0.871 | **0.920** | 90 % → **100 %** |
+| 4 | latín | 0.733 | **0.834** | 50 % → **90 %** |
+| 5 | coreano | 0.840 | **0.905** | 85 % → **100 %** |
+| 6 | hindi | 0.858 | **0.914** | 90 % → **100 %** |
 
 Con la cadena ingenua el significado se va perdiendo y el latín es el punto
 débil (la mitad de las frases queda por debajo del umbral). Con el re-anclaje
 la similitud se mantiene estable en los 6 pasos, sin acumular error: la frase
 final en hindi conserva el significado tanto como la del paso 2. La corrección
-desde el original solo hizo falta en el 5 % de los pasos de coreano.
+desde el original solo hizo falta en el 5 % de los pasos 2, 4 y 5.
+
+Ejemplo: *"El perro duerme bajo la mesa."* →
+*Canis sub mensam dormit.* → 개는 탁자 아래에서 잠을 자고 있습니다. → कुत्ता मेज के
+नीचे सो रहा है। → *Cane sub mensa dormit.* → …, y cada paso regresa como *"El
+perro duerme / está durmiendo debajo de la mesa"* (similitud 0.90-0.96).
 
 ![Similitud por paso](salidas/similitud_por_paso.png)
+
+### Efecto de la ida y vuelta
+
+Re-anclada sin ida y vuelta (corrida anterior,
+`salidas/resumen_por_paso_sin_ida_y_vuelta.csv`) contra con ida y vuelta:
+
+| Paso | Idioma | Similitud LaBSE (sin → con) | % arriba del umbral | chrF del regreso (sin → con) |
+|---|---|---|---|---|
+| 1 | latín | 0.847 → 0.846 | 90 % → 90 % | 81.2 → **84.2** |
+| 2 | coreano | 0.913 → 0.909 | 100 % → 100 % | 70.6 → **74.4** |
+| 3 | hindi | 0.922 → 0.920 | 100 % → 100 % | 70.8 → **74.6** |
+| 4 | latín | 0.840 → 0.834 | 95 % → 90 % | 69.2 → **78.0** |
+| 5 | coreano | 0.913 → 0.905 | 100 % → 100 % | 65.8 → **74.4** |
+| 6 | hindi | 0.919 → 0.914 | 100 % → 100 % | 70.0 → **73.7** |
+
+Las traducciones elegidas regresan al español con palabras más parecidas a la
+original (+3 a +9 de chrF, sobre todo en el segundo latín y el segundo
+coreano), a cambio de una similitud LaBSE apenas menor (≤ 0.008) y una frase
+menos arriba del umbral en el paso 4. Como el chrF del regreso se usa para
+elegir, esa subida está optimizada directamente y no es una mejora
+independiente; la conclusión justa es que se conserva el significado (LaBSE
+casi igual) y se gana fidelidad en las palabras. El costo es tiempo: en la T4
+la cadena re-anclada tarda ~38 s por frase (la ingenua ~14 s), porque cada
+candidata también se traduce de vuelta.
+
+> Los resúmenes (`resumen_por_paso.csv`, `metricas_opus.csv`) y la gráfica son de
+> esta corrida. Los CSV frase por frase (`resultados_cadena.csv`,
+> `traducciones_opus.csv`) siguen siendo de la corrida anterior, porque los de
+> esta no se subieron desde Colab.
 
 ## Créditos de los datos
 
