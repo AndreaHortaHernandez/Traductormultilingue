@@ -9,6 +9,13 @@ frase original.
 español → latín → coreano → hindi → latín → coreano → hindi
 ```
 
+
+> **Rama `modelo-12b`:** esta versión usa **TranslateGemma 12B** comprimido a 4
+> bits (`Infomaniak-AI/vllm-translategemma-12b-it`, ~8.5 GB en la T4) en vez del
+> 4B, sin adaptador de latín. Notebook: `colab/Traductor_12B_Colab.ipynb`
+> ([abrir en Colab](https://colab.research.google.com/github/AndreaHortaHernandez/Traductormultilingue/blob/modelo-12b/colab/Traductor_12B_Colab.ipynb)).
+> La versión principal (4B + adaptador) está en `main`.
+
 ## Idea general
 
 ### 1. Traducción con un Transformer: TranslateGemma

@@ -143,6 +143,7 @@ def crear_interfaz(traductor, verificador) -> gr.Blocks:
     with gr.Blocks(title="Traductor en cadena") as demo:
         gr.Markdown(
             "# Traductor en cadena: español → latín / coreano / hindi\n"
+            f"*Traductor: {getattr(config, 'NOMBRE_MODELO', config.MODELO_TRADUCCION)}*\n\n"
             "La frase pasa de un idioma a otro y en cada paso **LaBSE** verifica que siga "
             "significando lo mismo que el original. Acentos, ñ y ¿¡ funcionan normal."
         )

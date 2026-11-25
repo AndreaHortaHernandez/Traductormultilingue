@@ -31,8 +31,21 @@ def cargar_modelo_base():
     # "ImageTextToText"; aquí solo se le pasa texto. device_map carga los
     # pesos directo al dispositivo, sin pasar una copia completa por la RAM
     # (en Colab gratuito la RAM es menor que la memoria de la GPU).
+    extra = {}
+    if getattr(config, "CUANTIZAR_4BIT", False):
+        # Pesos en 4 bits (NF4) que se descomprimen a bfloat16 al multiplicar:
+        # el 12B pasa de ~24 GB a ~8 GB y cabe en la T4. La parte de visión no
+        # se usa y se deja sin comprimir.
+        from transformers import BitsAndBytesConfig
+        extra["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=config.TIPO_DATOS,
+            bnb_4bit_use_double_quant=True,
+            llm_int8_skip_modules=["vision_tower", "multi_modal_projector", "lm_head"],
+        )
     modelo = AutoModelForImageTextToText.from_pretrained(
-        config.MODELO_TRADUCCION, dtype=config.TIPO_DATOS, device_map=str(config.DISPOSITIVO),
+        config.MODELO_TRADUCCION, dtype=config.TIPO_DATOS, device_map=str(config.DISPOSITIVO), **extra,
     )
     modelo.generation_config.max_length = None  # se usa max_new_tokens
     return modelo

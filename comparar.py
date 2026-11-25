@@ -41,6 +41,12 @@ VARIANTES = {
 }
 VARIANTES_V1 = [n for n, v in VARIANTES.items() if v["adaptador"] != "v2"]
 VARIANTES_V2 = ["actual", "adaptador v2", "sin adaptador"]
+# Rama modelo-12b: sin adaptador (es del 4B), solo cambian umbral y candidatos.
+VARIANTES.update({
+    "12B": {"adaptador": True, "umbral": config.UMBRAL_SIMILITUD, "num_candidatos": config.NUM_CANDIDATOS},
+    "12B + umbral 0.85 + 6 cand.": {"adaptador": True, "umbral": 0.85, "num_candidatos": 6},
+})
+VARIANTES_12B = ["12B", "12B + umbral 0.85 + 6 cand."]
 
 RUTA_DETALLE = config.RUTA_SALIDAS / "comparacion_variantes.csv"
 RUTA_RESUMEN = config.RUTA_SALIDAS / "comparacion_resumen.csv"

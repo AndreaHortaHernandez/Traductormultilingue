@@ -38,6 +38,15 @@ RUTA_GRAFICA = RUTA_SALIDAS / "similitud_por_paso.png"
 # mismos pesos pero sin tener que pedir acceso en Hugging Face.
 MODELO_TRADUCCION = "Infomaniak-AI/vllm-translategemma-4b-it"
 
+# --- Rama modelo-12b: TranslateGemma 12B (mismo formato, 3x parámetros) ---
+# Copia abierta de Infomaniak-AI del modelo oficial (google/translategemma-12b-it,
+# que pide aprobación manual). En bfloat16 ocupa ~24 GB y la T4 gratuita tiene
+# 15 GB, así que se carga comprimido a 4 bits (NF4, bitsandbytes): ~8 GB.
+# El adaptador de latín se entrenó para el 4B y no sirve aquí: se usa el 12B tal cual.
+MODELO_TRADUCCION = "Infomaniak-AI/vllm-translategemma-12b-it"
+CUANTIZAR_4BIT = True
+NOMBRE_MODELO = "TranslateGemma 12B (4 bits)"
+
 # Verificador de significado: LaBSE (Google), Transformer tipo BERT que
 # convierte una frase de cualquiera de 109 idiomas (latín incluido) en un
 # vector; frases que significan lo mismo quedan cerca aunque estén en
@@ -127,7 +136,7 @@ SEMILLA = 42
 # modelo ya sabía de coreano e hindi. Se entrena en las dos direcciones
 # (es->la y la->es) porque la cadena también lee latín.
 RUTA_ADAPTADOR_LATIN = RAIZ / "adaptador_latin"
-USAR_ADAPTADOR_LATIN = True     # si existe el adaptador, se usa en los pasos con latín
+USAR_ADAPTADOR_LATIN = False    # rama modelo-12b: el adaptador es del 4B, no de este modelo
 LORA_RANGO = 16
 LORA_ALFA = 32
 LORA_DROPOUT = 0.05
@@ -151,7 +160,7 @@ RUTA_ADAPTADOR_LATIN_V2 = RAIZ / "adaptador_latin_v2"
 PALABRAS_V2 = (8, 22)
 MAX_PARES_V2 = 1600
 TASA_APRENDIZAJE_V2 = 1e-4      # menor que la del v1: se ajusta, no se empieza de cero
-TAM_LOTE_TRADUCCION = 16        # para evaluar con OPUS
+TAM_LOTE_TRADUCCION = 8         # para evaluar con OPUS (el 12B ocupa más memoria)
 
 DISPOSITIVO = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
