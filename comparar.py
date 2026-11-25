@@ -41,12 +41,16 @@ VARIANTES = {
 }
 VARIANTES_V1 = [n for n, v in VARIANTES.items() if v["adaptador"] != "v2"]
 VARIANTES_V2 = ["actual", "adaptador v2", "sin adaptador"]
-# Rama modelo-12b: sin adaptador (es del 4B), solo cambian umbral y candidatos.
+# Rama modelo-12b. "12B" y "12B + umbral..." son sin adaptador (así se corrieron
+# la primera vez); las "+ adaptador" usan el de adaptador_latin_12b/.
 VARIANTES.update({
-    "12B": {"adaptador": True, "umbral": config.UMBRAL_SIMILITUD, "num_candidatos": config.NUM_CANDIDATOS},
-    "12B + umbral 0.85 + 6 cand.": {"adaptador": True, "umbral": 0.85, "num_candidatos": 6},
+    "12B": {"adaptador": False, "umbral": config.UMBRAL_SIMILITUD, "num_candidatos": config.NUM_CANDIDATOS},
+    "12B + umbral 0.85 + 6 cand.": {"adaptador": False, "umbral": 0.85, "num_candidatos": 6},
+    "12B + adaptador": {"adaptador": True, "umbral": config.UMBRAL_SIMILITUD, "num_candidatos": config.NUM_CANDIDATOS},
+    "12B + adaptador + umbral 0.85 + 6 cand.": {"adaptador": True, "umbral": 0.85, "num_candidatos": 6},
 })
 VARIANTES_12B = ["12B", "12B + umbral 0.85 + 6 cand."]
+VARIANTES_12B_ADAPTADOR = ["12B + adaptador + umbral 0.85 + 6 cand."]
 
 RUTA_DETALLE = config.RUTA_SALIDAS / "comparacion_variantes.csv"
 RUTA_RESUMEN = config.RUTA_SALIDAS / "comparacion_resumen.csv"

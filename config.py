@@ -135,8 +135,11 @@ SEMILLA = 42
 # (q, k, v, o). Así cabe en la GPU gratuita de Colab y no se "olvida" lo que el
 # modelo ya sabía de coreano e hindi. Se entrena en las dos direcciones
 # (es->la y la->es) porque la cadena también lee latín.
-RUTA_ADAPTADOR_LATIN = RAIZ / "adaptador_latin"
-USAR_ADAPTADOR_LATIN = False    # rama modelo-12b: el adaptador es del 4B, no de este modelo
+# Rama modelo-12b: el adaptador de adaptador_latin/ es del 4B y no le sirve al 12B
+# (otras dimensiones). El del 12B se entrena con afinar_latin.afinar_12b() en
+# adaptador_latin_12b/; si no existe, el 12B traduce sin adaptador.
+RUTA_ADAPTADOR_LATIN = RAIZ / "adaptador_latin_12b"
+USAR_ADAPTADOR_LATIN = True
 LORA_RANGO = 16
 LORA_ALFA = 32
 LORA_DROPOUT = 0.05
@@ -148,7 +151,12 @@ EPOCAS_AFINADO = 1
 TAM_LOTE_AFINADO = 4
 PASOS_ACUMULACION = 2           # lote efectivo = 8
 TASA_APRENDIZAJE_LORA = 2e-4
-GUARDAR_CADA = 200              # pasos; por si Colab se desconecta
+GUARDAR_CADA = 10               # pasos; por si Colab se desconecta (el 12B tarda ~40 s por paso)
+# Adaptador del 12B (QLoRA: LoRA sobre el modelo comprimido a 4 bits). Mitad
+# frases cortas (las del v1) y mitad largas (las del v2), para que aprenda
+# latín y también frases complejas. Con 600 pares = 150 pasos; cada paso en la
+# T4 es ~3 veces más lento que con el 4B, así que ~1.5-2 h.
+PARES_12B = 600
 
 # Adaptador v2: parte del v1 y sigue entrenando SOLO con frases largas que el
 # v1 no vio (de MAX_PARES_ENTRENAMIENTO en adelante del archivo de

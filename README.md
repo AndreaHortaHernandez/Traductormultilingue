@@ -15,6 +15,10 @@ español → latín → coreano → hindi → latín → coreano → hindi
 > 4B, sin adaptador de latín. Notebook: `colab/Traductor_12B_Colab.ipynb`
 > ([abrir en Colab](https://colab.research.google.com/github/AndreaHortaHernandez/Traductormultilingue/blob/modelo-12b/colab/Traductor_12B_Colab.ipynb)).
 > La versión principal (4B + adaptador) está en `main`.
+>
+> **Adaptador para el 12B:** `colab/Adaptador_12B_Colab.ipynb` entrena uno propio (QLoRA, 600 pares cortos y largos,
+> guardado en Drive para poder continuar) en `adaptador_latin_12b/` y compara 6 candidatos + umbral 0.85 con y sin él.
+> Abrir: https://colab.research.google.com/github/AndreaHortaHernandez/Traductormultilingue/blob/modelo-12b/colab/Adaptador_12B_Colab.ipynb
 
 ## Idea general
 

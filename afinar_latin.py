@@ -204,5 +204,14 @@ def afinar_v2() -> None:
     )
 
 
+def afinar_12b() -> None:
+    """12B (rama modelo-12b): desde cero, mitad frases cortas del v1 y mitad
+    largas del v2, en config.RUTA_ADAPTADOR_LATIN (adaptador_latin_12b/)."""
+    mitad = config.PARES_12B // 2
+    pares = pares_v1()[:mitad] + pares_v2()[:mitad]
+    print(f"12B: {len(pares)} pares ({mitad} cortos + {len(pares) - mitad} largos).")
+    _entrenar(pares, config.RUTA_ADAPTADOR_LATIN, config.TASA_APRENDIZAJE_LORA, agrupar_por_largo=True)
+
+
 if __name__ == "__main__":
     afinar()

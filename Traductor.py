@@ -57,6 +57,7 @@ def main():
 
     sub.add_parser("opus", help="Descarga y prepara los datos de OPUS.")
     sub.add_parser("afinar", help="Fine-tuning del latín con los datos de OPUS (GPU).")
+    sub.add_parser("afinar_12b", help="Adaptador de latín para el 12B (rama modelo-12b), en adaptador_latin_12b/ (GPU).")
     sub.add_parser("afinar_v2", help="Sigue el adaptador de latín con frases largas, en adaptador_latin_v2/ (GPU).")
     sub.add_parser("evaluar_opus", help="BLEU / chrF++ contra las traducciones humanas de OPUS.")
 
@@ -77,6 +78,10 @@ def main():
     if args.comando == "afinar":
         import afinar_latin
         afinar_latin.afinar()
+        return
+    if args.comando == "afinar_12b":
+        import afinar_latin
+        afinar_latin.afinar_12b()
         return
     if args.comando == "afinar_v2":
         import afinar_latin
