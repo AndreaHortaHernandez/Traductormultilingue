@@ -11,7 +11,7 @@ Los dos Transformers del proyecto:
   parecido es su significado, aunque estén en idiomas distintos.
 """
 
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 
 import torch
 from sentence_transformers import SentenceTransformer
@@ -62,11 +62,47 @@ class Traductor:
             self.modelo = PeftModel.from_pretrained(self.modelo, config.RUTA_ADAPTADOR_LATIN)
             self.con_adaptador = True
         self.modelo.eval()
+        self.adaptadores_extra: list[str] = []
 
-    def _contexto(self, idioma_origen: str, idioma_destino: str, usar_adaptador: bool):
+    def agregar_adaptador(self, nombre: str, ruta) -> bool:
+        """Carga otro adaptador (p. ej. el v2) junto al que ya está, sin
+        recargar el modelo; se usa pasando usar_adaptador=nombre."""
+        if not (ruta / "adapter_config.json").exists():
+            print(f"No hay adaptador en '{ruta}'.")
+            return False
+        if self.con_adaptador:
+            self.modelo.load_adapter(ruta, adapter_name=nombre)
+        else:
+            from peft import PeftModel
+            self.modelo = PeftModel.from_pretrained(self.modelo, ruta, adapter_name=nombre)
+            self.con_adaptador = True
+            self._activo = nombre
+        self.modelo.eval()
+        self.adaptadores_extra.append(nombre)
+        print(f"Adaptador '{nombre}' cargado ({ruta.name}/).")
+        return True
+
+    @contextmanager
+    def _usar(self, nombre: str):
+        anterior = self.modelo.active_adapter
+        self.modelo.set_adapter(nombre)
+        try:
+            yield
+        finally:
+            self.modelo.set_adapter(anterior)
+
+    def _contexto(self, idioma_origen: str, idioma_destino: str, usar_adaptador):
         """El adaptador solo se aprendió con español<->latín: en los demás
-        pares se apaga para que el modelo traduzca exactamente como el original."""
-        if self.con_adaptador and not (usar_adaptador and "la" in (idioma_origen, idioma_destino)):
+        pares se apaga para que el modelo traduzca exactamente como el original.
+        usar_adaptador: True = el adaptador principal, False = ninguno, o el
+        nombre de uno cargado con agregar_adaptador."""
+        if not self.con_adaptador:
+            return nullcontext()
+        if not (usar_adaptador and "la" in (idioma_origen, idioma_destino)):
+            return self.modelo.disable_adapter()
+        if isinstance(usar_adaptador, str):
+            return self._usar(usar_adaptador)
+        if getattr(self, "_activo", None):  # solo hay adaptadores extra: True no tiene a cuál ir
             return self.modelo.disable_adapter()
         return nullcontext()
 

@@ -121,6 +121,7 @@ latín se compara el modelo base contra el afinado.
 | `interfaz.py` | Interfaz web con Gradio: frase, cadena, parámetros, tabla paso a paso y gráfica. |
 | `frases_prueba.txt` | 20 frases en español para la evaluación. |
 | `colab/Traductor_Colab.ipynb` | Notebook para Colab con GPU; trae todo el código adentro. |
+| `colab/Reentrenar_latin_v2.ipynb` | Entrena el adaptador **v2** (parte del v1 y sigue con ~1,500 frases largas que el v1 no vio) en `adaptador_latin_v2/`, sin tocar el v1, y compara v1 / v2 / sin adaptador. |
 | `salidas/` | Resultados de la evaluación (CSV y gráfica). |
 
 ## Cómo ejecutar (Google Colab, recomendado)

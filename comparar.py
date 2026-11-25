@@ -12,6 +12,8 @@ Variantes (todas con la cadena por defecto y la ida y vuelta de config):
 - umbral 0.85 + 6:   corrige desde el original más pasos dudosos y elige entre
                      más candidatos.
 - sin adaptador + umbral 0.85 + 6: las dos cosas.
+- adaptador v2:      el v2 (afinar_v2, frases largas), si existe adaptador_latin_v2/.
+- v2 + umbral 0.85 + 6.
 
 Para que la comparación sea justa, "% arriba de 0.75" se mide con el mismo
 umbral en todas, aunque la variante use otro para decidir cuándo corregir.
@@ -34,24 +36,29 @@ VARIANTES = {
     "sin adaptador": {"adaptador": False, "umbral": config.UMBRAL_SIMILITUD, "num_candidatos": config.NUM_CANDIDATOS},
     "umbral 0.85 + 6 cand.": {"adaptador": True, "umbral": 0.85, "num_candidatos": 6},
     "sin adaptador + umbral 0.85 + 6 cand.": {"adaptador": False, "umbral": 0.85, "num_candidatos": 6},
+    "adaptador v2": {"adaptador": "v2", "umbral": config.UMBRAL_SIMILITUD, "num_candidatos": config.NUM_CANDIDATOS},
+    "v2 + umbral 0.85 + 6 cand.": {"adaptador": "v2", "umbral": 0.85, "num_candidatos": 6},
 }
+VARIANTES_V1 = [n for n, v in VARIANTES.items() if v["adaptador"] != "v2"]
+VARIANTES_V2 = ["actual", "adaptador v2", "sin adaptador"]
 
 RUTA_DETALLE = config.RUTA_SALIDAS / "comparacion_variantes.csv"
 RUTA_RESUMEN = config.RUTA_SALIDAS / "comparacion_resumen.csv"
 
 
-class _SinAdaptador:
-    """Envuelve al traductor para que todos sus pasos usen el modelo original,
-    sin recargarlo en la GPU."""
+class _ConAdaptador:
+    """Envuelve al traductor para que todos sus pasos usen un adaptador dado
+    (False = el modelo original, o el nombre de uno extra como "v2"), sin
+    recargar el modelo en la GPU."""
 
-    def __init__(self, traductor):
-        self._t = traductor
+    def __init__(self, traductor, adaptador):
+        self._t, self._a = traductor, adaptador
 
     def traducir(self, texto, origen, destino, num_candidatos=1):
-        return self._t.traducir(texto, origen, destino, num_candidatos, usar_adaptador=False)
+        return self._t.traducir(texto, origen, destino, num_candidatos, usar_adaptador=self._a)
 
     def traducir_lote(self, textos, origen, destino):
-        return self._t.traducir_lote(textos, origen, destino, usar_adaptador=False)
+        return self._t.traducir_lote(textos, origen, destino, usar_adaptador=self._a)
 
 
 def comparar(
@@ -69,7 +76,16 @@ def comparar(
     if not ruta_frases.is_absolute():
         ruta_frases = config.RAIZ / ruta_frases
     frases = leer_frases(ruta_frases)[:limite]
-    nombres = variantes or list(VARIANTES)
+    if variantes is None:
+        variantes = VARIANTES_V1
+        if config.RUTA_ADAPTADOR_LATIN_V2.exists() and "v2" not in getattr(traductor, "adaptadores_extra", []):
+            traductor.agregar_adaptador("v2", config.RUTA_ADAPTADOR_LATIN_V2)
+        if "v2" in getattr(traductor, "adaptadores_extra", []):
+            variantes = VARIANTES_V1 + ["adaptador v2", "v2 + umbral 0.85 + 6 cand."]
+    nombres = list(variantes)
+    if any(VARIANTES[n]["adaptador"] == "v2" for n in nombres) and "v2" not in getattr(traductor, "adaptadores_extra", []):
+        if not traductor.agregar_adaptador("v2", config.RUTA_ADAPTADOR_LATIN_V2):
+            raise SystemExit("Las variantes 'v2' necesitan adaptador_latin_v2/ (entrénalo con afinar_v2).")
     cadena = config.CADENA_POR_DEFECTO
     chrf = CHRF()
     filas = []
@@ -79,7 +95,7 @@ def comparar(
 
     for nombre in nombres:
         v = VARIANTES[nombre]
-        t = traductor if v["adaptador"] else _SinAdaptador(traductor)
+        t = traductor if v["adaptador"] is True else _ConAdaptador(traductor, v["adaptador"])
         inicio_variante = time.time()
         for i, frase in enumerate(frases, start=1):
             inicio = time.time()

@@ -140,6 +140,17 @@ TAM_LOTE_AFINADO = 4
 PASOS_ACUMULACION = 2           # lote efectivo = 8
 TASA_APRENDIZAJE_LORA = 2e-4
 GUARDAR_CADA = 200              # pasos; por si Colab se desconecta
+
+# Adaptador v2: parte del v1 y sigue entrenando SOLO con frases largas que el
+# v1 no vio (de MAX_PARES_ENTRENAMIENTO en adelante del archivo de
+# entrenamiento, con PALABRAS_V2 palabras en español y en latín). El v1 se
+# entrenó con frases de ~10 palabras y falla con subordinadas, subjuntivo,
+# condicionales... Los lotes se arman con frases de largo parecido para no
+# gastar GPU en relleno: ~1,500 pares en ~70-90 min en una T4.
+RUTA_ADAPTADOR_LATIN_V2 = RAIZ / "adaptador_latin_v2"
+PALABRAS_V2 = (8, 22)
+MAX_PARES_V2 = 1600
+TASA_APRENDIZAJE_V2 = 1e-4      # menor que la del v1: se ajusta, no se empieza de cero
 TAM_LOTE_TRADUCCION = 16        # para evaluar con OPUS
 
 DISPOSITIVO = torch.device("cuda" if torch.cuda.is_available() else "cpu")
