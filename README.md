@@ -296,6 +296,31 @@ candidata también se traduce de vuelta.
 > `traducciones_opus.csv`) siguen siendo de la corrida anterior, porque los de
 > esta no se subieron desde Colab.
 
+### TranslateGemma 12B con y sin adaptador de latín
+
+Corrido en Colab (T4) con las 10 primeras frases de `frases_complejas.txt` y la cadena de 6 pasos
+(`salidas/comparacion_12b_*.csv` y `salidas/comparacion_12b_adaptador_*.csv`). El adaptador del 12B
+(QLoRA, 600 pares cortos y largos, 150 pasos) bajó la pérdida de 1.96 a 1.05
+(`salidas/estado_adaptador_12b.json`).
+
+| Variante | Similitud media | Similitud final | Mínima | En latín | % arriba de 0.75 | chrF regreso | s por frase |
+|---|---|---|---|---|---|---|---|
+| 12B | 0.869 | 0.864 | 0.744 | 0.835 | 96.7 % | 71.4 | 164 |
+| **12B + adaptador** | 0.881 | 0.879 | **0.775** | 0.863 | **100 %** | 75.1 | **154** |
+| 12B + umbral 0.85 + 6 cand. | **0.895** | **0.907** | 0.744 | 0.858 | 96.7 % | **79.6** | 254 |
+| 12B + adaptador + umbral 0.85 + 6 cand. | 0.892 | 0.891 | 0.744 | **0.876** | 98.3 % | 76.3 | 235 |
+
+- **El adaptador mejora el latín del 12B** (0.835 → 0.863), todas las salidas quedan arriba del
+  umbral y no se vuelve más lento.
+- **Más candidatos suben la similitud LaBSE pero no siempre la fidelidad.** Al leer cómo regresa cada
+  frase al español, la variante con 6 candidatos cambia «Mi abuela, que nació en 1940» por «Mi madre…» y
+  «Quisiera comer algo» por «yo y mi familia queremos comer»; la variante normal con adaptador conserva
+  «abuela». Las dos pierden matices («medianoche» → «amanecer», «prestaste» → «regalaste»).
+- El 0.744 mínimo es «El libro que me prestaste…»: la traducción al latín regresa idéntica al español,
+  pero LaBSE la califica bajo.
+- **Recomendación:** 12B + adaptador como versión de mejor calidad; el 4B + adaptador v1 (rama `main`)
+  sigue como versión principal porque responde en ~1 min por frase y corre sin GPU.
+
 ## Créditos de los datos
 
 Corpus descargados de [OPUS](https://opus.nlpl.eu) (J. Tiedemann, *Parallel Data,
