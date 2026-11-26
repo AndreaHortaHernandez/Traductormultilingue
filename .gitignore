@@ -4,4 +4,3 @@ __pycache__/
 .ipynb_checkpoints/
 # Descargas de OPUS: se bajan solas con opus.py (~36 MB)
 datos_opus/zips/
-adaptador_latin_12b
